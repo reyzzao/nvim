@@ -1,12 +1,8 @@
-# padrao git ignore repos in pc
-# --ignorando: Arquivos gerados por Git e editores
-.git/
-*.swp
-*.swo
-*.bak
-*~
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
 *.log
-*.DS_Store
-Thumbs.db
-
-# by Appication
+data
