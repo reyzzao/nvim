@@ -1,9 +1,6 @@
 
-
 ---
-Todo
-- C-z : esta fechando imediatamente sem salvar
-- falta autopairs
-- tira debug do nvim-tree
-- 
+Instalation
+- antes de começar instalar rodar mybash funcao: `cleanLazyvim` # para limpar o cache
+
 ---

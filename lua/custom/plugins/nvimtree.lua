@@ -32,24 +32,15 @@ return {
       },
       actions = {
           open_file = {
-              quit_on_open = true,
+              quit_on_open = true, -- Fecha a árvore ao abrir um arquivo
           },
       },
       -- Mapeamentos de teclas específicos do nvim-tree quando ele está ativo.
-      -- A função on_attach é chamada quando o buffer do nvim-tree é criado.
+      -- Estes são úteis para navegar DENTRO da árvore.
       on_attach = function(bufnr)
           -- Adicionando vim.schedule para garantir que a API esteja pronta
           vim.schedule(function()
               local api = require("nvim-tree.api")
-
-              -- -- --- DEBUG PRINTS ---
-              -- -- Estas linhas irão imprimir o conteúdo de 'api' e 'api.node'
-              -- -- no buffer de mensagens do Neovim (:messages).
-              -- print("DEBUG: on_attach executado para nvim-tree. Buffer: " .. bufnr)
-              -- print("DEBUG: Valor de 'api': " .. vim.inspect(api))
-              -- print("DEBUG: Valor de 'api.node': " .. vim.inspect(api.node))
-              -- print("DEBUG: Valor de 'api.node.navigate.parent_close': " .. vim.inspect(api.node.navigate.parent_close))
-              -- -- --- FIM DEBUG PRINTS ---
 
               -- Função auxiliar para setar opções de mapeamento
               local function map_opts(desc)
@@ -57,7 +48,7 @@ return {
               end
 
               -- Mapeamentos comuns para nvim-tree
-              -- Verifica se a função existe antes de mapear
+              -- Verificações de tipo adicionadas para robustez
               if api.node and type(api.node.open.edit) == 'function' then
                 vim.keymap.set('n', 'l', api.node.open.edit, map_opts('Abrir'))
               end
@@ -66,7 +57,7 @@ return {
               end
               if api.node and type(api.node.navigate.down) == 'function' then
                 vim.keymap.set('n', 'j', api.node.navigate.down, map_opts('Baixo'))
-              end
+              end -- <--- CORREÇÃO AQUI: 'end' no lugar de '}'
               if api.node and type(api.node.navigate.up) == 'function' then
                 vim.keymap.set('n', 'k', api.node.navigate.up, map_opts('Cima'))
               end
@@ -91,7 +82,7 @@ return {
               if api.tree and type(api.tree.toggle_help) == 'function' then
                 vim.keymap.set('n', '?', api.tree.toggle_help, map_opts('Ajuda'))
               end
-              if api.node and type(api.node.open.edit) == 'function' then -- Repetido, mas para garantir
+              if api.node and type(api.node.open.edit) == 'function' then
                 vim.keymap.set('n', '<CR>', api.node.open.edit, map_opts('Abrir'))
               end
               if api.node and type(api.node.open.vertical) == 'function' then

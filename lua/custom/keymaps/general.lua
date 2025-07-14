@@ -1,11 +1,7 @@
 -- ~/.config/nvim/lua/custom/keymaps/general.lua
 
 -- Este arquivo contém todos os mapeamentos de teclas personalizados do Neovim
--- e comandos personalizados, buscando uma experiência similar ao VS Code.
-
--- --- Abreviações (Substituições de Texto) ---
--- As abreviações foram movidas para um arquivo separado ou desabilitadas para evitar conflitos.
--- Este arquivo agora foca apenas em mapeamentos de teclas e comandos.
+-- e comandos personalizados.
 
 -- --- Mapeamentos de Teclas Gerais ---
 
@@ -16,16 +12,7 @@ vim.keymap.set({ 'n', 'i' }, '<C-s>', function()
 end, { desc = 'Salvar arquivo' })
 
 -- Fechar Editor/Buffer (com confirmação padrão do Neovim)
--- Se houver alterações não salvas, o Neovim pedirá para salvar ou forçar a saída.
--- O mapeamento <C-A-k> pode ser interceptado pelo terminal.
--- vim.keymap.set('n', '<C-A-k>', ':q<CR>', { desc = 'Fechar editor (pede confirmação se modificado)' })
-
 vim.keymap.set('n', '<C-k>', ':q<CR>', { desc = 'Fechar editor (pede confirmação)' })
-
--- Outra alternativa comum (se você usa <leader> key):
--- vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Fechar editor (Leader+Q, pede confirmação)' })
-
-
 vim.keymap.set('n', '<A-w>', ':bd<CR>', { desc = 'Fechar buffer em foco (pede confirmação se modificado)' })
 vim.keymap.set('n', '<A-q>', ':qa<CR>', { desc = 'Fechar todos os buffers (pede confirmação se modificado)' })
 
@@ -49,7 +36,18 @@ vim.keymap.set({ 'n', 'v' }, '<A-d>', 'd', { desc = 'Deletar linha/seleção' })
 vim.keymap.set('i', '<A-d>', '<Esc>ddi', { desc = 'Deletar linha (modo inserção)' })
 
 -- Explorador de Arquivos (NvimTree e Netrw)
-vim.keymap.set('n', '<A-e>', ':NvimTreeToggle<CR>', { desc = 'Alternar NvimTree (Explorer 1)' })
+-- NOVO: Mapeamento mais robusto para NvimTree
+vim.keymap.set('n', '<A-e>', function()
+  local nvimtree_api = require('nvim-tree.api')
+  if nvimtree_api.tree.is_visible() then
+    vim.notify("NvimTree visível, fechando...", vim.log.levels.INFO, { title = "NvimTree" })
+    nvimtree_api.tree.close()
+  else
+    vim.notify("NvimTree não visível, abrindo...", vim.log.levels.INFO, { title = "NvimTree" })
+    nvimtree_api.tree.open()
+  end
+end, { desc = 'Alternar NvimTree (Explorer 1)' })
+
 vim.keymap.set('n', '<leader>e', ':Ex<CR>', { desc = 'Abrir explorador padrão (Netrw)' }) -- Usa :Ex para o Netrw
 
 -- Multi-cursor (Apenas placeholder, requer plugin específico como 'mg979/vim-visual-multi')
