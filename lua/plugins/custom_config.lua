@@ -95,7 +95,8 @@ return {
         end
         return response_data
       end
-      local function generate_content(prompt)
+
+      local function generate_from_prompt(prompt)
         vim.notify("Gerando conteúdo com Gemini...", vim.log.levels.INFO)
         vim.uv.new_thread(function()
           local response_data = gemini_api_request(prompt)
@@ -112,28 +113,45 @@ return {
           end
         end)
       end
+    
       vim.api.nvim_create_user_command(
-        "GeminiGenerate",
+        "GeminiPrompt",
         function()
-          local selected_text = ""
-          if vim.api.nvim_get_mode().mode == "v" then
-            selected_text = vim.fn.getreg('"')
-          end
           vim.ui.input({ prompt = "Prompt Gemini: " }, function(input)
             if input and input ~= "" then
-              local full_prompt = input
-              if selected_text ~= "" then
-                full_prompt = full_prompt .. "\n\nCódigo:\n" .. selected_text
-              end
-              generate_content(full_prompt)
+              generate_from_prompt(input)
             end
           end)
         end,
-        { nargs = 0, desc = "Gerar conteudo com Gemini" }
+        { nargs = 0, desc = "Gerar conteudo com Gemini a partir de um prompt" }
+      )
+      
+      vim.api.nvim_create_user_command(
+        "GeminiCode",
+        function()
+          local start_line = vim.api.nvim_buf_get_mark(0, "[")[1]
+          local end_line = vim.api.nvim_buf_get_mark(0, "]")[1]
+          local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+          local selected_text = table.concat(lines, "\n")
+          
+          if not selected_text or selected_text:len() == 0 then
+            vim.notify("Nenhum texto selecionado. Selecione algo em modo visual primeiro.", vim.log.levels.INFO)
+            return
+          end
+          
+          vim.ui.input({ prompt = "Prompt para o código: " }, function(input)
+            if input and input ~= "" then
+              local full_prompt = input .. "\n\nCódigo:\n" .. selected_text
+              generate_from_prompt(full_prompt)
+            end
+          end)
+        end,
+        { nargs = 0, desc = "Gerar conteudo com Gemini a partir de um bloco de codigo" }
       )
     end,
     keys = {
-      { "<leader>pg", ":GeminiGenerate<CR>", mode = { "n", "v" }, desc = "Gerar conteudo com Gemini" },
+      { "<leader>pG", ":GeminiPrompt<CR>", mode = { "n" }, desc = "Prompt Gemini" },
+      { "<leader>pg", ":GeminiCode<CR>", mode = { "v" }, desc = "Gerar com Codigo" },
     },
   },
 }

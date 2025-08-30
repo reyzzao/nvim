@@ -24,6 +24,10 @@ end, { desc = 'Salvar arquivo e formatar' })
 
 --- Mapeamentos GERAIS
 
+-- Maps IA Gemini
+map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
+map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
+
 --- Prefixo: leader + p
 map('n', '<M-e>', ':Ex<CR>', { desc = 'Explorer do Vim >> Netwr' }) -- obs: function toogle nao funciona- problemas nativos.
     -- map('n', '<Esc>e', '<Cmd>lua toggle_netrw()<CR>', { desc = 'Alternar Explorer do Vim >> Netwr' }) -- Mapeamento para funcionar em terminais que não suportam <A-e> nativamente
