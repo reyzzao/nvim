@@ -1,28 +1,14 @@
 -- @file: ~/.config/nvim/lua/lsp/servers.lua
 
--- @mission: Configura os Language Servers específicos para diferentes linguagens.
---           Centraliza a lógica de mapeamento de teclas e configurações padrão
---           para todos os servidores.
--- @args: Não há argumentos.
-
 local lspconfig = require('lspconfig')
 
--- @mission: Anexa o comportamento e os mapeamentos de teclas a um buffer
---           quando um cliente LSP é iniciado.
--- @args:
---    - client: O objeto do cliente LSP.
---    - bufnr: O número do buffer ao qual o cliente está anexado.
+--- Anexa o comportamento e as configurações específicas a um buffer
+--- quando um cliente LSP é iniciado.
 local function on_attach_default(client, bufnr)
     -- Mapeamentos de teclas comuns para LSP
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition', buffer = bufnr })
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Go to Declaration', buffer = bufnr })
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to References', buffer = bufnr })
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to Implementation', buffer = bufnr })
+    -- Apenas mapeamentos que precisam de 'buffer = bufnr'
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation', buffer = bufnr })
-    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename Symbol {ok}', buffer = bufnr })
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action', buffer = bufnr })
-    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true, buf = bufnr }) end, { desc = 'Format Code', buffer = bufnr })
-
+    
     -- Configurações para lista de diagnósticos (erros/warnings)
     vim.diagnostic.config({
         virtual_text = false,
@@ -53,9 +39,9 @@ local function on_attach_default(client, bufnr)
     })
 end
 
--- --- Configuração dos Language Servers ---
+--- Configuração dos Language Servers ---
 
--- @mission: Configura o Deno LSP para TypeScript/JavaScript.
+-- Configura o Deno LSP para TypeScript/JavaScript.
 lspconfig.denols.setup({
     init_options = {
         enable = true,
@@ -67,7 +53,7 @@ lspconfig.denols.setup({
     filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'json', 'jsonc', 'markdown' },
 })
 
--- @mission: Configura o Lua com o Lua-LS.
+-- Configura o Lua com o Lua-LS.
 lspconfig.lua_ls.setup({
     on_attach = on_attach_default,
     settings = {

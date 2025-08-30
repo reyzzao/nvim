@@ -5,6 +5,12 @@
 
 -- --- Opções Gerais do Neovim ---
 
+-- Ui
+local font_formal = os.getenv("USE_FONT_IN_EDITOR") or "Fira Code" -- controlado em mybash : # @file: ~/.bash_aliases
+
+vim.opt.guifont = font_formal .. ":h18" -- define tamanho da font
+vim.opt.linespace = 6 -- Define o espaço extra entre as linhas (em pixels), como depende da font usando 6 ficou bom para Fira Code , inspiracao: no vscode é 1.5 por padrao, obs: por enquanto nao aceita numero flutuante aqui #evite_erros.
+
 vim.opt.nu = true        -- Número de linha
 vim.opt.relativenumber = true -- Números relativos
 vim.opt.tabstop = 4      -- Tamanho do tab
