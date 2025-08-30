@@ -1,0 +1,5 @@
+{
+  "dkjson": { "branch": "master", "commit": "e72ba0c9f5d8b8746fc306f6189a819dbb5cd0be" },
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" }
+}
