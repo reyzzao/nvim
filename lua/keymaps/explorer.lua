@@ -4,7 +4,8 @@ local map = vim.keymap.set
 
 -- Mapeamento para o plug explorer : neo-tree
 map('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Alternar Neo-tree >> Para: quer a árvore de arquivos ao lado, como uma barra lateral fixa. É o jeito mais comum e tradicional.' })
-map('n', '<leader>ne', ':Neotree float<CR>', { desc = 'Alternar Neo-tree Flutuante >> Para : dar uma OLHADINHA rápida nos arquivos sem bagunçar a sua tela. A janela flutuante aparece por cima do seu código e some quando você a fecha.':  })
+map('n', '<leader>ne', ':Neotree float<CR>', { desc = 'Alternar Neo-tree Flutuante >> Para : dar uma OLHADINHA rápida nos arquivos sem bagunçar a sua tela. A janela flutuante aparece por cima do seu código e some quando você a fecha.'  })   
+  
 
   
 --[[   
