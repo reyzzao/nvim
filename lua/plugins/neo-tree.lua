@@ -56,23 +56,18 @@ return {
           ["v"] = "open_vsplit", -- desc: Abrir arquivo em split vertical
           ["s"] = "open_split", -- desc: Abrir arquivo em split horizontal
           ["<space>"] = "toggle_preview", -- desc: Pre-visualizar arquivo
-          
-          -- Atalhos de undo e redo
-          ["u"] = "undo", -- desc: Desfazer a ultima operacao
-          ["<C-r>"] = "redo", -- desc: Refazer a ultima operacao
         }
 
         for key, action in pairs(keymaps) do
           vim.keymap.set('n', key, action, {
-            desc = 'neo-tree: ' .. (keymaps[key].desc or tostring(action)),
+            desc = 'neo-tree: ' .. tostring(action),
             buffer = bufnr
           })
         end
       end,
     })
 
-    -- Mapeamentos globais para alternar a janela
+    -- Mapeamento global para alternar a janela em modo flutuante
     vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Alternar Neo-tree' })
-    vim.keymap.set('n', '<leader>ne', ':Neotree float<CR>', { desc = 'Alternar Neo-tree Flutuante' })
   end,
 }
