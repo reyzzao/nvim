@@ -11,7 +11,7 @@ local notify = vim.notify
 
 --- Prefixo: leader + p
 
-map('n', '<leader>ph', ':InsertHeader<CR>', { desc = 'Insere endereço relativo do arquivo.' })
+map('n', '<leader>ph', ':InsertHeader<CR>', { desc = 'Insere endereço relativo do arquivo.' }) -- todo: parou
 map('n', '<leader>pm', ':messages<CR>', { desc = 'Mostra mensagens' })
 
 -- map('n', '<C-Click>', ':normal! gf<CR>', { noremap = true, silent = true, desc = 'tão Esquerdo do Mouse >> Abre erro clicavel no Terminal em novo buffer' })
