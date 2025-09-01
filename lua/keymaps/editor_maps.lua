@@ -64,6 +64,15 @@ local map = vim.keymap.set
 -- Maps de Terminal
 map('n', '<A-t>',toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' })
 
+-- explorer >> maps --
+map('n', '<leader>ex', ':Ex<CR>', { desc = 'Explorer nativo netwr' })
+-- telescope maps
+map('n', '<leader>eb', ':Telescope buffers<CR>', { desc = 'Mostra buffers recentes via telescope.' })
+map('n', '<leader>eo', function() require('telescope.builtin').find_files() end, { desc = 'Buscar arquivos (Telescope)' })
+map('n', '<leader>ef', function() require('telescope.builtin').current_buffer_fuzzy_find() end, { desc = 'Pesquisar no arquivo atual' })
+map('n', '<C-g><C-f>', function() require('telescope.builtin').live_grep() end, { desc = 'Pesquisar no projeto (Live Grep)' })
+
+
 --- Maps Movimentação
 map('n', '<A-Down>', ':m .+1<CR>==', { desc = 'Mover linha para baixo' })
 map('n', '<A-Up>', ':m .-2<CR>==', { desc = 'Mover linha para cima' })

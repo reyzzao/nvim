@@ -68,6 +68,6 @@ return {
     })
 
     -- Mapeamento global para alternar a janela em modo flutuante
-    vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Alternar Neo-tree' })
+    vim.keymap.set('n', '<leader>en', ':Neotree toggle<CR>', { desc = 'Alternar Neo-tree' })
   end,
 }
