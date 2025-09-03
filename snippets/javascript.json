@@ -1,4 +1,9 @@
 {
+  "noformat": {
+    "prefix": "noformat",
+    "body": ["// @NoFormatOnSave"],
+    "description": "noformat"
+  },
   "doc": {
     "prefix": "doc",
     "body": ["// @desc: ${1}"],

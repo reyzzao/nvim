@@ -41,15 +41,19 @@ map({ 'n', 'v' }, '<C-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' 
 map({ 'n', 'v' }, '<C-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
 map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
 
+-- formata o arquivo ao salvar - removendo consoles e depuracoes de acordo com a regra do linter
+local log_info = vim.log.levels.INFO
+local notify = vim.notify
+
 map({ 'n', 'i' }, '<C-s>', function()
     vim.api.nvim_command('w')
-    local success, result = pcall(vim.lsp.buf.format)
-    if success and result then
-        notify("Arquivo salvo e formatado!", log_info, { title = "Salvar" })
-    else
-        notify("Arquivo salvo! Formatação falhou.", log_info, { title = "Salvar" })
-    end
-end, { desc = 'Salvar arquivo e formatar' })
+    notify("Arquivo salvo!", log_info, { title = "Salvar" })
+end, { desc = 'Salvar arquivo' })
+
+map({ "n", "v" }, "<leader>f", function()
+    vim.lsp.buf.format()
+    notify("Arquivo formatado!", log_info, { title = "Formatar" })
+end, { desc = "Formatar arquivo" })
 
 
 map('n', '<C-z>', 'u', { desc = 'Desfazer' })

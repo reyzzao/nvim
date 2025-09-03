@@ -1,4 +1,14 @@
 {
+  "noformat": {
+    "prefix": "noformat",
+    "body": ["// @NoFormatOnSave"],
+    "description": "noformat"
+  },
+  "fileName": {
+    "prefix": "fileName",
+    "body": ["// @file: ${1}", ""],
+    "description": "fileName"
+  },
   "console": {
     "prefix": "console",
     "body": "console.log('$1');",
@@ -54,11 +64,6 @@
     "prefix": "desc",
     "body": ["// @desc: ${1}"],
     "description": "desc insere um comentario para descricao acima do artefato"
-  },
-  "fileName": {
-    "prefix": "fileName",
-    "body": ["// @file: ${1}", ""],
-    "description": "fileName"
   },
   "auto export classe controller": {
     "prefix": "auto export classe controller",
