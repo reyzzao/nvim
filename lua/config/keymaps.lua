@@ -141,7 +141,16 @@ end
 -- Maps de Terminal
 map('n', '<A-t>',toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' })
 
---- Maps Movimentação
+--- Maps Movimentação  -- Lefth Rigth
+
+-- funciona identacao no modo vim : no modo normal:  shift << ou >> 
+-- map('i', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
+-- map('i', '<A-Rigth>', '>>', { noremap = true, silent = true, desc = 'identacao' })
+-- map('n', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
+-- map('n', '<A-Rigth>', '>>', { noremap = true, silent = true, desc = 'identacao' })
+-- map('v', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
+-- map('v', '<A-Rigth>', '>>', { noremap = true, silent = true, desc = 'identacao' })
+
 map('n', '<A-k>', ':m .+1<CR>==', { desc = 'Mover linha para baixo' })
 map('n', '<A-j>', ':m .-2<CR>==', { desc = 'Mover linha para cima' })
 map('v', '<A-k>', ":m '>+1<CR>gv=gv", { desc = 'Mover selecao para baixo' })
