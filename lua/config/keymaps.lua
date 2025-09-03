@@ -9,6 +9,28 @@ local notify = vim.notify
 
 --- Mapeamentos de EDIÇÃO
 
+-- testando_texto 
+ 
+--  toogle alternar maiusculo minusculo : leader>U
+
+local toggle_case = function()
+    local current_word = vim.fn.expand("<cword>")
+    if current_word == nil or current_word == "" then
+        return
+    end
+    local first_char = current_word:sub(1, 1)
+    local new_word
+    if first_char == first_char:upper() then
+        new_word = current_word:lower()
+    else
+        new_word = current_word:upper()
+    end
+    vim.api.nvim_command("normal! ciw" .. new_word)
+end
+
+-- Atalho para alternar a caixa da palavra
+map("n", "<leader>U", toggle_case, { desc = "Alternar caixa da palavra" })
+
 
 --- Prefixo: leader + p
 
@@ -26,8 +48,8 @@ map("n", "<leader>prc", function()
 end, { desc = "Recarregar config do Neovim" })
 map('n', '<leader>k', ':confirm q<CR>', { desc = 'Fechar Kill Neovim (com confirmação)' })
 map('n', '<leader>q', function()
-  require('persistence').save() -- Salva a sessao manualmente
-  vim.cmd('qa!') -- Forca a saida depois
+    require('persistence').save() -- Salva a sessao manualmente
+    vim.cmd('qa!')              -- Forca a saida depois
 end, { desc = 'Fechar o Neovim e salvar sessao com :qa!' })
 
 --- Mapeamentos de COPIAR/RECORTAR/COLAR
@@ -36,7 +58,7 @@ map('n', '<leader>pc', function()
     vim.fn.setreg('+', file_path)
     notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
 end, { desc = 'Copiar caminho completo do arquivo' })
-    
+
 map({ 'n', 'v' }, '<C-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' })
 map({ 'n', 'v' }, '<C-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
 map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
@@ -72,7 +94,8 @@ map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
 map({ 'n', 'v' }, '<C-Down>', 'yP', { desc = 'Duplicar linha/seleção' })
 
 -- Mapeamentos de teclas para LSP
-map('n', '<leader>li', vim.lsp.buf.hover, { desc = 'Recurso: LSP Hover >> mostra info de artefatos ao passar mouse., atalho:li de : Lsp info' })
+map('n', '<leader>li', vim.lsp.buf.hover,
+    { desc = 'Recurso: LSP Hover >> mostra info de artefatos ao passar mouse., atalho:li de : Lsp info' })
 
 map('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
 map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Go to Declaration' })
@@ -105,45 +128,45 @@ end
 
 --- Alterna um terminal em um split vertical (vsplit).
 local function toggle_vsplit_terminal()
-  -- Procura o ID do buffer de um terminal aberto.
-  local function find_terminal_buffer()
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      local buf = vim.api.nvim_win_get_buf(win)
-      if vim.bo[buf].buftype == 'terminal' then
-        return buf
-      end
+    -- Procura o ID do buffer de um terminal aberto.
+    local function find_terminal_buffer()
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.bo[buf].buftype == 'terminal' then
+                return buf
+            end
+        end
+        return nil
     end
-    return nil
-  end
 
-  local terminal_buf = find_terminal_buffer()
-  
-  if terminal_buf then
-    -- Se o buffer do terminal ja existe, esconda-o.
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if vim.api.nvim_win_get_buf(win) == terminal_buf then
-        vim.api.nvim_win_close(win, true)
-        return
-      end
+    local terminal_buf = find_terminal_buffer()
+
+    if terminal_buf then
+        -- Se o buffer do terminal ja existe, esconda-o.
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_buf(win) == terminal_buf then
+                vim.api.nvim_win_close(win, true)
+                return
+            end
+        end
     end
-  end
 
-  -- Se o buffer do terminal nao existe ou nao esta visivel, crie um novo.
-  vim.cmd('vsplit')
-  vim.cmd('cd %:p:h')
-  vim.cmd('terminal')
-  vim.cmd('startinsert')
-  terminal_buf = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_set_keymap(terminal_buf, 'n', '<C-c>', ':q!<CR>', { noremap = true })
-  vim.api.nvim_buf_set_option(terminal_buf, 'buflisted', true)
+    -- Se o buffer do terminal nao existe ou nao esta visivel, crie um novo.
+    vim.cmd('vsplit')
+    vim.cmd('cd %:p:h')
+    vim.cmd('terminal')
+    vim.cmd('startinsert')
+    terminal_buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_keymap(terminal_buf, 'n', '<C-c>', ':q!<CR>', { noremap = true })
+    vim.api.nvim_buf_set_option(terminal_buf, 'buflisted', true)
 end
 
 -- Maps de Terminal
-map('n', '<A-t>',toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' })
+map('n', '<A-t>', toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' })
 
 --- Maps Movimentação  -- Lefth Rigth
 
--- funciona identacao no modo vim : no modo normal:  shift << ou >> 
+-- funciona identacao no modo vim : no modo normal:  shift << ou >>
 -- todo: esses nao funcionando apra identar
 -- map('i', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
 -- map('i', '<A-Rigth>', '>>', { noremap = true, silent = true, desc = 'identacao' })
@@ -172,7 +195,7 @@ map('n', '<A-w>', ':qa<CR>', { desc = 'Fechar todos os buffers/janelas' })
 map('n', '<A-S-k>', ':resize -2<CR>', { desc = 'Diminuir altura da janela' })
 map('n', '<A-S-j>', ':resize +2<CR>', { desc = 'Aumentar altura da janela' })
 map('n', '<A-S-l>', ':vertical resize -2<CR>', { desc = 'Diminuir largura da janela - direcao mao direita' })
-map('n', '<A-S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da janela - direcao mao esquerda' }) 
+map('n', '<A-S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da janela - direcao mao esquerda' })
 
 
 

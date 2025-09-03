@@ -1,20 +1,17 @@
 -- ~/.config/nvim/lua/custom/plugins/treesitter.lua
--- Especificação do plugin nvim-treesitter para lazy.nvim
+
 return {
   'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate', -- Comando para instalar os parsers de linguagem
+  build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
-      -- Lista de linguagens para instalar automaticamente
-      ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "html", "css", "json" },
-      -- Habilitar destaque de sintaxe
-      highlight = {
-        enable = true,
-        -- Outras opções de destaque, se necessário
+      ensure_installed = { 
+        "c", "cpp", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "html", "css", "json",
+        "markdown",
+        "markdown_inline",
       },
-      -- Habilitar indentação automática
+      highlight = { enable = true },
       indent = { enable = true },
-      -- Você pode adicionar outras configurações aqui, como parsers adicionais, textobjects, etc.
     }
   end,
 }
