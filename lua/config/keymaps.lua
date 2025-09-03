@@ -144,6 +144,7 @@ map('n', '<A-t>',toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' 
 --- Maps Movimentação  -- Lefth Rigth
 
 -- funciona identacao no modo vim : no modo normal:  shift << ou >> 
+-- todo: esses nao funcionando apra identar
 -- map('i', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
 -- map('i', '<A-Rigth>', '>>', { noremap = true, silent = true, desc = 'identacao' })
 -- map('n', '<A-Lefth>', '<<', { noremap = true, silent = true, desc = 'identacao' })
