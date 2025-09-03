@@ -1,0 +1,12 @@
+{
+  "fileName": {
+    "prefix": "fileName",
+    "body": ["// @file: ${1}"],
+    "description": "fileName"
+  },
+  "doc": {
+    "prefix": "doc",
+    "body": ["// @desc: ${1}"],
+    "description": "doc"
+  }
+}
