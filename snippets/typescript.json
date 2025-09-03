@@ -1,0 +1,466 @@
+{
+  "console": {
+    "prefix": "console",
+    "body": "console.log('$1');",
+    "description": "console log TS"
+  },
+  "Arrow Function": {
+    "prefix": "afn",
+    "body": "const $1 = ($2) => {\n\t$3\n};",
+    "description": "Arrow Function"
+  },
+  "fn_soma": {
+    "prefix": "fn_soma",
+    "body": "function soma(a, b) {\n\treturn a + b;\n}",
+    "description": "fn_soma"
+  },
+
+  "decisoes_switch_case": {
+    "prefix": "decisoes_switch_case",
+    "body": [
+      "/**",
+      " * @mission: Realiza a seleção de um resultado com base em um valor de entrada.",
+      " * @arg: (valor de entrada)",
+      " * @logic: Utiliza um switch para mapear o valor de entrada para um resultado específico.",
+      " */",
+      "function ${1:selecionarResultado}(${2:valor}: ${3:any}): ${4:any} {",
+      "  switch (${2:valor}) {",
+      "    case '${5:caso1}':",
+      "      return ${6:resultado_para_caso1};",
+      "    case '${7:caso2}':",
+      "      return ${8:resultado_para_caso2};",
+      "    default:",
+      "      // O 'default' serve como uma rede de segurança para qualquer valor inesperado.",
+      "      return ${9:resultado_padrao};",
+      "  }",
+      "}"
+    ],
+    "description": "decisoes_switch_case"
+  },
+  "doc": {
+    "prefix": "doc",
+    "body": [
+      "/**",
+      " * @description: _ .",
+      " * @param {${1|string,number,object,any|}} ${2:arg} - _ .",
+      " * @returns {${3:any}}",
+      " * @remarks: lógica :  _ .",
+      " */",
+      ""
+    ],
+    "description": "doc para documentar artefatos [ funcoes]. "
+  },
+  "desc": {
+    "prefix": "desc",
+    "body": ["// @desc: ${1}"],
+    "description": "desc insere um comentario para descricao acima do artefato"
+  },
+  "fileName": {
+    "prefix": "fileName",
+    "body": ["// @file: ${1}", ""],
+    "description": "fileName"
+  },
+  "auto export classe controller": {
+    "prefix": "auto export classe controller",
+    "body": ["export default new ${1}()"],
+    "description": "auto export classe controller"
+  },
+
+  "divid": {
+    "prefix": "divid",
+    "body": ["", "/* ---------------------- // ---------------------- */", "/* $0 */", "//"],
+    "description": "divid"
+  },
+
+  "tipagem js": {
+    "prefix": "type",
+    "body": [
+      "/**",
+      " * descricao :: $0",
+      " * @param {$1} $2 ",
+      " * @param {string} nomeParam // exemplo",
+      " */",
+      "",
+      ""
+    ],
+    "description": "tipagem js"
+  },
+
+  "metodo__interface--ts": {
+    "prefix": "metodo__interface--ts",
+    "body": ["async ${1:metodo}: () => Promise<${2: tipo}[]>"],
+    "description": "method__interface--ts"
+  },
+
+  "metodo__classe--ts": {
+    "prefix": "metodo__classe--ts",
+    "body": ["async ${1:metodo}(): Promise<${2: tipo}[]> {}"],
+    "description": "method__interface--ts"
+  },
+
+  "export-modulo-classe__JS": {
+    "prefix": "export-modulo-classe__JS",
+    "body": ["class ${1:modulo} {", "    constructor() {}", "}", "", "module.exports = ${1:modulo}"],
+    "description": "export-modulo-classe__JS"
+  },
+
+  "comment": {
+    "prefix": "comment",
+    "body": ["/*", "* $0", "*/"],
+    "description": "comment"
+  },
+
+  "class": {
+    "prefix": "export class - typescript",
+    "body": ["export class ${TM_DIRECTORY/^.+\\\\/(.*)$/$1/}$1 {", "    constructor() {}", "}"],
+    "description": "class"
+  },
+
+  "interface": {
+    "prefix": "export interface - typescript",
+    "body": ["export interface ${TM_DIRECTORY/^.+\\\\/(.*)$/$1/}$1 {$2}"],
+    "description": "interface"
+  },
+
+  "export tudo": {
+    "prefix": "export tudo",
+    "body": ["export * from '.$1'"],
+    "description": "export tudo"
+  },
+
+  "eslint nao usar var": {
+    "prefix": "eslint nao usar var",
+    "body": ["/* eslint-disable no-unused-vars */"],
+    "description": "eslint nao usar var"
+  },
+
+  "objeto": {
+    "prefix": "objeto",
+    "body": [
+      "const ${1:objeto} = {",
+      "    contexto: '',",
+      "    entrada: ``,",
+      "    processamento: ``,",
+      "    saida: ``,",
+      "    detalhes: ``",
+      "}"
+    ],
+    "description": "objeto"
+  },
+
+  "requisito": {
+    "prefix": "requisito",
+    "body": [
+      "## API : $1",
+      "",
+      "## REQUISITOS",
+      "- [] Deve ser possivel ",
+      "",
+      "",
+      "## REGRAS DE NEGOCIO",
+      "- [] Não Deve ser possivel "
+    ],
+    "description": "requisito"
+  },
+
+  "no-problem-export": {
+    "prefix": "no-problem-export",
+    "body": [
+      "/* ---------------------- // ---------------------- */",
+      "//",
+      "//",
+      "export default 1",
+      "//",
+      "//",
+      "/* ---------------------- // ---------------------- */"
+    ],
+    "description": "no-problem-export"
+  },
+
+  "var__obj_repete": {
+    "prefix": "var__obj_repete",
+    "body": ["${1:var}: `$2`,", "$3"],
+    "description": "var"
+  },
+
+  "obj-estudo": {
+    "prefix": "obj-estudo",
+    "body": [
+      "/* eslint-disable no-unused-vars */",
+      "",
+      "const ${1:obj} = {",
+      "    sub_chaves: {",
+      "        contexto: `",
+      "            ...",
+      "            `,",
+      "",
+      "        cenarios_quePrecisaTer: `",
+      "            ['',]`,",
+      "        entrada: `",
+      "            ...",
+      "            `,",
+      "",
+      "        processa: `",
+      "            ...",
+      "            `,",
+      "",
+      "        saida: `",
+      "            ...",
+      "        `",
+      "",
+      "    }",
+      "}"
+    ],
+    "description": "obj-estudo"
+  },
+
+  "express": {
+    "prefix": "express import",
+    "body": ["import { Router, Request, Response } from 'express'"],
+    "description": "express import"
+  },
+
+  "createPrototype": {
+    "prefix": "createPrototype",
+    "body": [
+      "private constructor(",
+      "    private readonly _props?: IArgs",
+      "  ) {",
+      "    Object.assign(this, _props)",
+      "  }",
+      "",
+      "  static async createPrototype(props: IArgs) {",
+      "    return new $1(props)",
+      "  }"
+    ],
+    "description": "createPrototype"
+  },
+
+  "valor_novo_ou_default_coalescencia_nula": {
+    "prefix": "valor_novo_ou_default_coalescencia_nula",
+    "body": ["\"novoValor\" ?? \"Ou_valorDefault\""],
+    "description": "valor_novo_ou_default_coalescencia_nula"
+  },
+
+  "pipe_fnOBJParams_async_Generic_TS": {
+    "prefix": "pipe_fnOBJParams_async_Generic_TS",
+    "body": [
+      "/**",
+      " * @description  PIPE TS ASYNC DE FUNCOES QUE RECEBEM PARAMS DO TIPO OBJETO COM REGRAS.",
+      " * @detalhes  PASSE O TIPO DO TARGET QUE VIRA NA REQUEST < no T GENERICO DA FN > , ARGUMENTO AS FNS PODEM RECEBER OBJ DE ARGUMENTO.",
+      " * @important  o obj de regras terá de ser do tipo TypeParamRules ex: export type { TypeParamRules as TypeParamRules } from \"/home/rzj/x/_github_rz_/SuperLibs_TS/SuperLibsTS/pipesFN/pipeAsync_FNsParamObject_Rules/lib.ts\".",
+      " * @import importe o tipo",
+      "* @args (1º o dado alvo, 2º o array de funcoes, 3º é o argumento das funcoes que tem que ser um objeto que atua regrando a funcao o mesmo tipo do obj é usado aqui. )",
+      "* @returns retornará o resultado do dadoAlvo submetido por todas as funcoes do array recebido.",
+      "* @exemplo await sut<TypeDotargetRequest> (requestMock, listFN, paramRule)",
+      " */",
+      "",
+      "export async function pipe$1Rules<T>(target: T, listFN: any[], param?: TypeParamRules) {",
+      "  return await listFN.reduce((acc, fn) => {",
+      "    return fn(acc, param)",
+      "  target)",
+      "}"
+    ],
+    "description": "pipe_fnOBJParams_async_Generic_TS"
+  },
+
+  "testDeno": {
+    "prefix": "testDeno",
+    "body": [
+      "// deno-lint-ignore-file no-explicit-any no-unused-vars",
+      "import { expect } from \"@deps\";",
+      "",
+      "// const repoInuse: IExample1Repository = example1RepositoriesOptions.memory",
+      "// const sut: CreateExample1UseCase = createExample1UseCaseFactory(repoInuse);",
+      "// const seed: ISeddCreateExample1 = seedCreateExample101",
+      "",
+      "// function cleanRepo() {",
+      "//   repoInuse.collection = []",
+      "// }",
+      "",
+      "",
+      "Deno.test({",
+      "  name: \"[ Example1 ] deve retornar a Entidade igual o salvo em repo memory.\",",
+      "  only: false,",
+      "  async fn() {",
+      "",
+      "    cleanRepo()",
+      "",
+      "  //   const expected: ISeddCreateExample1 = await seed",
+      "",
+      "  //   const tested: Example1 = await sut.execute(fakeCreateExample1DTO)",
+      "  //   console.log(tested)",
+      "",
+      "  //   expect(await tested).toEqual(expected);",
+      "  //   expect(await tested).toHaveProperty(\"ID\");",
+      "  //   expect(await tested.Props).toHaveProperty(\"Nome\");",
+      "  //   expect(await tested.Props).toHaveProperty(\"Email\");",
+      "  //   expect(await tested.Props.Email).toBe(expected.Props.Email);",
+      "  },",
+      "});//",
+      "",
+      "export default 1",
+      ""
+    ],
+    "description": "testDeno"
+  },
+
+  "assert_throw_Error_Test_DENO": {
+    "prefix": "assert_throw_Error_Test_DENO",
+    "body": [
+      "import { assertThrows } from \"https://deno.land/std@0.219.0/assert/mod.ts\";",
+      "",
+      "Deno.test({",
+      "  name: \"[ OK ] deve retornar a messagem de erro <$1.> .\",",
+      "  only: false,",
+      "  async fn() {",
+      "    function targetFN(d: string) {",
+      "      try {",
+      "        const res = new ClassMock(d)",
+      "        return res",
+      "      } catch (e) {",
+      "        throw e",
+      "      }",
+      "    }",
+      "",
+      "    assertThrows(",
+      "      () => { targetFN(\"a\") Error, `Ops... `, )",
+      "  },",
+      "  ",
+      "});"
+    ],
+    "description": "assert_throw_Error_Test_DENO"
+  },
+
+  "deno_test_import_Assert": {
+    "prefix": "deno_test_import_Assert",
+    "body": [
+      "import {",
+      "  assert, assertThrows, assertEquals, assertExists,",
+      "  assertInstanceOf,",
+      "  assertStringIncludes, assertArrayIncludes",
+      "$1",
+      "} from \"https://deno.land/std@0.219.0/assert/mod.ts\";"
+    ],
+    "description": "deno_test_import_Assert"
+  },
+
+  "testDenoSuite": {
+    "prefix": "testDenoSuite",
+    "body": [
+      "Deno.test({",
+      "  name: \"[ FAIL ] deve retornar $1 .\",",
+      "  only: false,",
+      "  async fn() {",
+      "",
+      "",
+      "    expect(true)",
+      "    Log(\"RESULTADO >> \", action)",
+      "  },",
+      "",
+      "});"
+    ],
+    "description": "testDenoSuite"
+  },
+
+  "conceito_Completo": {
+    "prefix": "conceito_Completo",
+    "body": [
+      "titulo: \"$1\",",
+      "categorias: [\"\", \"\", ],",
+      "contexto: \"\",",
+      "conceito: \"\",",
+      "observacoes: \"#null\",",
+      "exemplos: `",
+      "",
+      "`,",
+      ""
+    ],
+    "description": "conceito_Completo"
+  },
+
+  "model_class_custom_error_ts": {
+    "prefix": "model_class_custom_error_ts",
+    "body": [
+      "export class $1InvalidEntity extends Error {",
+      "  constructor(msg: string) {",
+      "    super(`\\${msg}`);",
+      "    this.name = `InvalidEntity`;",
+      "  }",
+      "}"
+    ],
+    "description": "model_class_custom_error_ts"
+  },
+
+  "noExport_DEFAULT_1": {
+    "prefix": "noExport_DEFAULT_1",
+    "body": ["", "export default 1", ""],
+    "description": "noExport_DEFAULT_1"
+  },
+
+  "todo_futuro": {
+    "prefix": "todo_futuro",
+    "body": ["// -- #futuro::> reservado para $1  . --"],
+    "description": "todo_futuro"
+  },
+
+  "todo_naoImplementado": {
+    "prefix": "todo_naoImplementado",
+    "body": ["// -- #TODO: NaoImplementado --"],
+    "description": "todo_naoImplementado"
+  },
+
+  "todo_RetornandoErro": {
+    "prefix": "todo_RetornandoErro",
+    "body": ["// -- #TODO: RetornandoErro --"],
+    "description": "todo_RetornandoErro"
+  },
+
+  "todo_MelhorarNoFuturo": {
+    "prefix": "todo_MelhorarNoFuturo",
+    "body": ["// -- #TODO: MelhorarNoFuturo --"],
+    "description": "todo_MelhorarNoFuturo"
+  },
+
+  "modelo_cleanRepoTS": {
+    "prefix": "modelo_cleanRepoTS",
+    "body": [
+      "function cleanRepo() {",
+      "  repoInUse.memory.items = []!",
+      "}",
+      "// -- modelo limpar repo inmemory -- como ele é o de test tenho que só mandar limpar. --"
+    ],
+    "description": "modelo_cleanRepoTS"
+  },
+
+  "decorador_de_Classe": {
+    "prefix": "decorador_de_Classe",
+    "body": [
+      "/**",
+      " * @desc Criando prop <version> na classe via decorador",
+      " * @logica recebi o construtor do alvo, devolvo a heranca deste alvo adicionando uma variavel campo com o valor recebido da decoracaoPai",
+      " */",
+      "",
+      "",
+      "function SetApiVersion(apiVersion: string, foo: string) {",
+      "",
+      "  return (constructor: any) => {",
+      "",
+      "    return class extends constructor {",
+      "      version = apiVersion",
+      "      fooProp = foo",
+      "    }",
+      "",
+      "  }",
+      "",
+      "}",
+      "",
+      "@SetApiVersion(\"1.0.0\", \"valor para fooProp\")",
+      "class Foo { }",
+      "",
+      "// ao instanciar a classe vejo a propriedade nela criada via decorador com o que ele recebeu.",
+      "console.log(new Foo())"
+    ],
+    "description": "decorador_de_Classe"
+  }
+}

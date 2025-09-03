@@ -1,0 +1,23 @@
+{
+  "doc": {
+    "prefix": "doc",
+    "body": ["// @desc: ${1}"],
+    "description": "doc"
+  },
+  "fn_soma_js": {
+    "prefix": "fn_soma_js",
+    "body": [
+      "function ${1:sum}(${2:a}, ${3:b}) {",
+      "\treturn ${2:a} + ${3:b};",
+      "}"
+    ],
+    "description": "Cria uma função JavaScript para somar dois números."
+  },
+  "console_js": {
+    "prefix": "console_js",
+    "body": [
+      "console.log(${1:variavel});"
+    ],
+    "description": "Atalho para console.log para js"
+  }
+}

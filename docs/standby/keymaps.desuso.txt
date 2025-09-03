@@ -1,0 +1,19 @@
+
+Keymaps in desuso
+
+map('n', '<A-e>', ':NvimTreeToggle<CR>', { desc = 'Alternar Explorer do Nvim >> NvimTree' }) -- desuso: usando o toggle do Ex do vim
+
+
+-- ... outros mapeamentos
+
+-- Mapeamento para a função do Gemini - todo: nao funcionando
+-- vim.keymap.set("n", "<leader>pg", function()
+--   require("core.gemini").generate_content()
+-- end, { desc = "Gerar conteúdo com Gemini" })
+
+--- Mapeamentos de scripts e terminal
+-- map("n", "<leader>grr", ":!gitrr.sh<CR>", { desc = "Git: Executa o script gitrr.sh" })
+-- map("n", "<leader>gaa", ":!gitall.sh<CR>", { desc = "Git: Executa o script gitall.sh" })
+-- map("n", "<leader>gaa", ":!gitall.sh<CR>", { desc = "Git: Executa o script gitall.sh" })
+
+---
