@@ -10,7 +10,7 @@ return {
   },
   keys = {
     {
-      "<leader>ep",
+      "<A-e>",
       function()
         require("neo-tree.command").execute({
           toggle = true,
@@ -21,7 +21,7 @@ return {
       desc = "NeoTree: Navegar no projeto",
     },
     {
-      "<leader>eP",
+      "<leader>eg",
       function()
         require("neo-tree.command").execute({
           toggle = true,

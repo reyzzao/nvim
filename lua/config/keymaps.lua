@@ -131,7 +131,7 @@ map('n', '<A-S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da jan
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Encontrar arquivos" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Busca por string" })
 map("n", "<leader>eo", "<cmd>Telescope find_files<cr>", { desc = "Buscar arquivos (Telescope)" })
-map("n", "<leader>ef", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Pesquisar no arquivo atual" })
+map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Pesquisar no arquivo atual" })
 map("n", "<C-g><C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Pesquisar no projeto (Live Grep)" })
 map("n", "<leader>R", function()
   local word = vim.fn.expand("<cword>")
@@ -151,7 +151,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<LeftMouse>', '<cmd>lua vim.lsp.buf.definition()<CR>', { buffer = args.buf, desc = 'Ir para a definição (mouse)' })
   end,
 })
-
---- Maps IA Gemini
-map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
-map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
