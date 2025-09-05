@@ -7,7 +7,8 @@ local lspconfig = require('lspconfig')
 local function on_attach_default(client, bufnr)
     -- Mapeamentos de teclas comuns para LSP
     -- Apenas mapeamentos que precisam de 'buffer = bufnr'
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation', buffer = bufnr })
+    -- ver informacoes doa artefato: `K` maiuculo, ou <leader>li >> mapeado para o vim.lsp.buf.hover().
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation - mostra informacoes de artefatos', buffer = bufnr })
     
     -- Configurações para lista de diagnósticos (erros/warnings)
     vim.diagnostic.config({
