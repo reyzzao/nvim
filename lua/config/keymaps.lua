@@ -83,7 +83,7 @@ map({ "n", "v" }, "<leader>f", function()
     notify("Arquivo formatado!", log_info, { title = "Formatar" })
 end, { desc = "Formatar arquivo" })
 
---- Mapeamento de Terminal
+--- Mapeamento de Terminal vsplit lateral 
 local function toggle_vsplit_terminal()
   local function find_terminal_buffer()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -130,7 +130,6 @@ map('n', '<A-S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da jan
 --- Mapeamentos do Telescope
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Encontrar arquivos" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Busca por string" })
-map("n", "<leader>eo", "<cmd>Telescope find_files<cr>", { desc = "Buscar arquivos (Telescope)" })
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Pesquisar no arquivo atual" })
 map("n", "<C-g><C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Pesquisar no projeto (Live Grep)" })
 map("n", "<leader>R", function()
@@ -144,10 +143,21 @@ map("n", "<leader>R", function()
   end
 end, { desc = "Busca para substituição global" })
 
---- Mapeamento para ir para a definição com o mouse
+--- Mapeamentos para navegar entre buffers e tabs
+map("n", "<C-Right>", ":bnext<CR>", { desc = "Próximo buffer" })
+map("n", "<C-Left>", ":bprevious<CR>", { desc = "Buffer anterior" })
+map("n", "<C-S-Right>", ":tabnext<CR>", { desc = "Próxima tab" })
+map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
+
+
+--- Mapeamento para ir para a definição de simbolo com o mouse
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('LspMouseMaps', { clear = true }),
   callback = function(args)
     vim.keymap.set('n', '<LeftMouse>', '<cmd>lua vim.lsp.buf.definition()<CR>', { buffer = args.buf, desc = 'Ir para a definição (mouse)' })
   end,
 })
+
+--- Maps IA Gemini
+map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
+map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })

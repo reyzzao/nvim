@@ -1,7 +1,3 @@
--- @file: ~/.config/nvim/lua/plugins/telescope.lua
--- @mission: Mantém a configuração do Telescope no formato mais simples e compatível com o LazyVim.
--- Depende de `nvim-lua/plenary.nvim`.
-
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.6",
@@ -19,5 +15,21 @@ return {
         },
       },
     },
+  },
+  keys = {
+    { "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Encontrar arquivos" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Busca por string" },
+    { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Pesquisar no arquivo atual" },
+    { "<C-g><C-f>", "<cmd>Telescope live_grep<cr>", desc = "Pesquisar no projeto (Live Grep)" },
+    { "<leader>R", function()
+      local word = vim.fn.expand("<cword>")
+      if word ~= nil and word ~= "" then
+        require("telescope.builtin").live_grep({
+          search_terms = { word },
+        })
+      else
+        require("telescope.builtin").live_grep()
+      end
+    end, desc = "Busca para substituição global" },
   },
 }

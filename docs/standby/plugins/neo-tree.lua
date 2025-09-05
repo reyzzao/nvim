@@ -1,4 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/neo-tree.lua
+-- @mission: explorer files flutuant
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
