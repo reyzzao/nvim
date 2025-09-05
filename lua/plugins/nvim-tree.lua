@@ -9,7 +9,7 @@ return {
     sort_by = "case_sensitive",
     view = {
       width = 40,
-      side = "right", -- opcoes_posicao: left , right
+      side = "right", -- options side: left or right
       float = {
         enable = false,
         open_win_config = {
@@ -23,11 +23,8 @@ return {
     },
     filters = {
       dotfiles = true,
-      -- O erro estava aqui. A opção correta é 'exclude'.
       exclude = {
         "node_modules",
-        -- Adicione extensões aqui se precisar, como 'out', 'bak', etc.
-        -- Exemplo: "*.out", "*.bak"
       },
       custom = {},
     },
@@ -39,9 +36,9 @@ return {
   },
   keys = {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Alternar Explorer (NvimTree)" },
-    { "a", "<cmd>NvimTreeCreate<cr>", mode = { "n", "v" }, desc = "Criar arquivo" },
-    { "d", "<cmd>NvimTreeCreate<cr>", mode = { "n", "v" }, desc = "Criar pasta" },
-    { "r", "<cmd>NvimTreeRename<cr>", mode = { "n", "v" }, desc = "Renomear" },
-    { "x", "<cmd>NvimTreeDelete<cr>", mode = { "n", "v" }, desc = "Deletar" },
+    { "<leader>a", "<cmd>NvimTreeCreate<cr>", mode = { "n", "v" }, desc = "Criar arquivo" },
+    { "<leader>d", "<cmd>NvimTreeCreate<cr>", mode = { "n", "v" }, desc = "Criar pasta" },
+    { "<leader>r", "<cmd>NvimTreeRename<cr>", mode = { "n", "v" }, desc = "Renomear" },
+    { "<leader>x", "<cmd>NvimTreeDelete<cr>", mode = { "n", "v" }, desc = "Deletar" },
   },
 }

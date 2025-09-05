@@ -30,7 +30,7 @@ map("n", "<leader>prc", function()
   vim.cmd("source " .. vim.fn.stdpath("config") .. "/init.lua")
   notify("Configuração recarregada!", log_info)
 end, { desc = "Recarregar config do Neovim" })
-map('n', '<leader>k', ':confirm q<CR>', { desc = 'Fechar Kill Neovim (com confirmação)' })
+map('n', '<leader>k', ':qa!<CR>', { desc = 'Fechar Kill Neovim sem salvar nada abandona!obs: auto save ligado vai salvar msm assim! #warning' })
 map('n', '<leader>q', function()
   require('persistence').save()
   vim.cmd('qa!')
@@ -42,9 +42,7 @@ map('n', '<leader>pc', function()
   vim.fn.setreg('+', file_path)
   notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
 end, { desc = 'Copiar caminho completo do arquivo' })
-map({ 'n', 'v' }, '<C-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' })
-map({ 'n', 'v' }, '<C-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
-map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
+
 
 -- Mapeamento de SALVAR com verificacao de buffer
 map({ 'n', 'i' }, '<C-s>', function()
@@ -56,19 +54,37 @@ map({ 'n', 'i' }, '<C-s>', function()
   end
 end, { desc = 'Salvar arquivo' })
 
---- Mapeamentos de UNDO/REDO/Selecao
+-- edicao --
+map('n', 'yy', '"+yy', { desc = "Copiar linha para o clipboard do sistema" })
+map('n', 'yy', '"+yy', { desc = "Copiar linha para o clipboard" })
+map('n', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
+map('v', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
+  
+map({ 'n', 'v' }, '<C-S-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' })
+map({ 'n', 'v' }, '<C-S-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
+map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
+
 map('n', '<C-z>', 'u', { desc = 'Desfazer' })
 map('i', '<C-z>', '<Esc>ui', { desc = 'Desfazer (modo inserção)' })
 map('n', '<C-r>', '<C-r>', { desc = 'Refazer' })
 map('i', '<C-r>', '<Esc><C-r>i', { desc = 'Refazer (modo inserção)' })
 map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
+
+
+--- linha
+-- Deleta a linha atual em todos os modos
+map('n', '<A-d>', 'dd', { desc = 'Deletar linha' })
+map('i', '<A-d>', '<Esc>dd', { desc = 'Deletar linha' })
+map('v', '<A-d>', 'd', { desc = 'Deletar linha' })
+
 map('n', '<A-l>', 'V', { desc = 'Selecionar linha atual' })
 map('i', '<A-l>', '<Esc>V', { desc = 'Selecionar linha atual (modo inserção)' })
+map({ 'n', 'v' }, '<C-Down>', 'yP', { desc = 'Duplicar linha/seleção' })
+-- identacao
 map({ 'n', 'v' }, '<A-Right>', '>>', { desc = 'Indentar para direita' })
 map({ 'n', 'v' }, '<A-Left>', '<<', { desc = 'Indentar para esquerda' })
 map('i', '<C-Right>', '<Esc>>>a', { desc = 'Indentar para direita (modo inserção)' })
 map('i', '<C-Left>', '<Esc><<a', { desc = 'Indentar para esquerda (modo inserção)' })
-map({ 'n', 'v' }, '<C-Down>', 'yP', { desc = 'Duplicar linha/seleção' })
 
 --- Mapeamentos de LSP e Formatação
 map('n', '<leader>li', vim.lsp.buf.hover, { desc = 'LSP: Mostra info de artefatos' })
