@@ -1,4 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/neo-tree.lua
+-- @mission: explorer files flutuant
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
@@ -10,7 +11,7 @@ return {
   },
   keys = {
     {
-      "<leader>ep",
+      "<A-e>",
       function()
         require("neo-tree.command").execute({
           toggle = true,
@@ -21,7 +22,7 @@ return {
       desc = "NeoTree: Navegar no projeto",
     },
     {
-      "<leader>eP",
+      "<leader>eg",
       function()
         require("neo-tree.command").execute({
           toggle = true,

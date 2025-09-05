@@ -1,41 +1,35 @@
--- @file: ~/.config/nvim/lua/plugins/telescope.lua
--- @package: plugins.telescope
-
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.6",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  config = function()
-    local telescope = require("telescope")
-    local actions = require("telescope.actions")
-    local builtin = require("telescope.builtin")
-
-    telescope.setup({
-      defaults = {
-        mappings = {
-          i = {
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<C-j>"] = actions.move_selection_next,
-            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<esc>"] = actions.close,
-          },
+  opts = {
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-k>"] = require("telescope.actions").move_selection_previous,
+          ["<C-j>"] = require("telescope.actions").move_selection_next,
+          ["<C-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+          ["<esc>"] = require("telescope.actions").close,
         },
       },
-    })
-
-    local keymap = vim.keymap.set
-
-    -- Encontra arquivos em todo o projeto
-    keymap("n", "<C-p>", builtin.find_files, { noremap = true, silent = true })
-
-    -- Busca por strings em todo o projeto
-    keymap("n", "<leader>fg", builtin.live_grep, { noremap = true, silent = true })
-    
-    -- Atalhos que você pediu
-    keymap("n", "<leader>eo", builtin.find_files, { desc = 'Buscar arquivos (Telescope)' })
-    keymap("n", "<leader>ef", builtin.current_buffer_fuzzy_find, { desc = 'Pesquisar no arquivo atual' })
-    keymap("n", "<C-g><C-f>", builtin.live_grep, { desc = 'Pesquisar no projeto (Live Grep)' })
-  end,
+    },
+  },
+  keys = {
+    { "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Encontrar arquivos" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Busca por string" },
+    { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Pesquisar no arquivo atual" },
+    { "<C-g><C-f>", "<cmd>Telescope live_grep<cr>", desc = "Pesquisar no projeto (Live Grep)" },
+    { "<leader>R", function()
+      local word = vim.fn.expand("<cword>")
+      if word ~= nil and word ~= "" then
+        require("telescope.builtin").live_grep({
+          search_terms = { word },
+        })
+      else
+        require("telescope.builtin").live_grep()
+      end
+    end, desc = "Busca para substituição global" },
+  },
 }

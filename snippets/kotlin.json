@@ -1,4 +1,9 @@
 {
+  "noformat": {
+    "prefix": "noformat",
+    "body": ["// @NoFormatOnSave"],
+    "description": "noformat"
+  },
   "fileName": {
     "prefix": "fileName",
     "body": ["// @file: ${1}"],
