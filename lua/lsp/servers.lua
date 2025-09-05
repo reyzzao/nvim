@@ -3,28 +3,6 @@
 local lspconfig = require('lspconfig')
 
 --- Anexa o comportamento e as configurações específicas a um buffer
---- quando um cliente LSP é iniciado.
-local function on_attach_default(client, bufnr)
-    -- Mapeamentos de teclas comuns para LSP
-    -- Apenas mapeamentos que precisam de 'buffer = bufnr'
-    -- ver informacoes doa artefato: `K` maiuculo, ou <leader>li >> mapeado para o vim.lsp.buf.hover().
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation - mostra informacoes de artefatos', buffer = bufnr })
-    
-    -- Configurações para lista de diagnósticos (erros/warnings)
-    vim.diagnostic.config({
-        virtual_text = false,
-        signs = true,
-        update_in_insert = false,
-        severity_sort = true,
-        float = {
-            focusable = false,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
-        },
-    })
     
     -- Autocmd para formatar no save, se o servidor oferecer essa capacidade
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -38,7 +16,6 @@ local function on_attach_default(client, bufnr)
         end,
         desc = 'Auto-format on save via LSP',
     })
-end
 
 --- Configuração dos Language Servers ---
 

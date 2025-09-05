@@ -1,4 +1,5 @@
 -- ~/.config/nvim/lua/plugins/cmp.lua
+-- @mission: Configura o nvim-cmp para que o pop-up de auto completar  #complete não seja exibido automaticamente. O pop-up só será ativado quando o usuário pressionar Ctrl + Espaço.
 
 return {
   'hrsh7th/nvim-cmp',
@@ -63,6 +64,9 @@ return {
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
+      },
+      completion = {
+        autocomplete = false, -- Desativa o pop-up automático
       },
     })
   end,

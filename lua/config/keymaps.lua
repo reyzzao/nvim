@@ -165,14 +165,38 @@ map("n", "<C-Left>", ":bprevious<CR>", { desc = "Buffer anterior" })
 map("n", "<C-S-Right>", ":tabnext<CR>", { desc = "Próxima tab" })
 map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
 
+--- @mission: Configura mapeamentos de teclado para funções LSP.
+-- Adiciona o atalho <C-Space> para mostrar informações do artefato e mantém o mapeamento do mouse.
 
---- Mapeamento para ir para a definição de simbolo com o mouse
+-- Mapeamento para ir para a definição de simbolo com o mouse ao clicar 2vezes {ok} #ir_simbolo funcao auxiliar abaixo para atalho >> on_attach_default ()
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('LspMouseMaps', { clear = true }),
   callback = function(args)
     vim.keymap.set('n', '<LeftMouse>', '<cmd>lua vim.lsp.buf.definition()<CR>', { buffer = args.buf, desc = 'Ir para a definição (mouse)' })
   end,
 })
+
+-- fn_auxiliar para ir ao simplobo com atalho quando um cliente LSP é iniciado.
+local function on_attach_default(client, bufnr)
+  -- Novo mapeamento para mostrar informações do artefato com `K` maiusculo de Keyword
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation - mostra informacoes de artefatos', buffer = bufnr })
+
+  -- Configurações para lista de diagnósticos (erros/warnings)
+  vim.diagnostic.config({
+      virtual_text = false,
+      signs = true,
+      update_in_insert = false,
+      severity_sort = true,
+      float = {
+          focusable = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+      },
+  })
+end
 
 --- Maps IA Gemini
 map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
