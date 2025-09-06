@@ -21,7 +21,12 @@ local toggle_case = function()
   end
   vim.api.nvim_command("normal! ciw" .. new_word)
 end
+
 map("n", "<leader>U", toggle_case, { desc = "Alternar caixa da palavra" })
+map("n", "<leader>e", ':Ex<CR>', { desc = "explorer nativo netwr" })
+
+map('n', '<C-Down>', 'yyP', { desc = 'Duplicar linha' })
+map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
 
 --- Prefixo: leader + p
 map('n', '<leader>ph', ':InsertHeader<CR>', { desc = 'Insere endereço relativo do arquivo.' })
@@ -70,16 +75,24 @@ map('n', '<C-r>', '<C-r>', { desc = 'Refazer' })
 map('i', '<C-r>', '<Esc><C-r>i', { desc = 'Refazer (modo inserção)' })
 map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
 
-
 --- linha
--- Deleta a linha atual em todos os modos
 map('n', '<A-d>', 'dd', { desc = 'Deletar linha' })
 map('i', '<A-d>', '<Esc>dd', { desc = 'Deletar linha' })
 map('v', '<A-d>', 'd', { desc = 'Deletar linha' })
-
 map('n', '<A-l>', 'V', { desc = 'Selecionar linha atual' })
 map('i', '<A-l>', '<Esc>V', { desc = 'Selecionar linha atual (modo inserção)' })
-map({ 'n', 'v' }, '<C-Down>', 'yP', { desc = 'Duplicar linha/seleção' })
+
+--- Mapeamentos de Movimentação
+map('n', '<C-Home>', 'gg', { desc = 'Ir para o inicio do arquivo' })
+map('n', '<C-End>', 'G', { desc = 'Ir para o fim do arquivo' })
+map('n', '<C-w><C-w>', '<C-w><C-w>', { desc = 'Navegar entre janelas' })
+map('n', '<A-q>', ':bd<CR>', { desc = 'Fechar buffer (janela) em foco' })
+map('n', '<A-w>', ':qa<CR>', { desc = 'Fechar todos os buffers/janelas' })
+-- resize
+map('n', '<S-k>', ':resize -2<CR>', { desc = 'Diminuir altura da janela' })
+map('n', '<S-j>', ':resize +2<CR>', { desc = 'Aumentar altura da janela' })
+map('n', '<S-l>', ':vertical resize -2<CR>', { desc = 'Diminuir largura da janela' })
+map('n', '<S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da janela' })
 -- identacao
 map({ 'n', 'v' }, '<A-Right>', '>>', { desc = 'Indentar para direita' })
 map({ 'n', 'v' }, '<A-Left>', '<<', { desc = 'Indentar para esquerda' })
@@ -126,22 +139,6 @@ local function toggle_vsplit_terminal()
 end
 map('n', '<A-t>', toggle_vsplit_terminal, { desc = 'Alternar Terminal em Vsplit' })
 
---- Mapeamentos de Movimentação
-map('n', '<A-k>', ':m .+1<CR>==', { desc = 'Mover linha para baixo' })
-map('n', '<A-j>', ':m .-2<CR>==', { desc = 'Mover linha para cima' })
-map('v', '<A-k>', ":m '>+1<CR>gv=gv", { desc = 'Mover selecao para baixo' })
-map('v', '<A-j>', ":m '<-2<CR>gv=gv", { desc = 'Mover selecao para cima' })
-map('i', '<A-k>', '<Esc>:m .+1<CR>==gi', { desc = 'Mover linha para baixo (insercao)' })
-map('i', '<A-j>', '<Esc>:m .-2<CR>==gi', { desc = 'Mover linha para cima (insercao)' })
-map('n', '<C-Home>', 'gg', { desc = 'Ir para o inicio do arquivo' })
-map('n', '<C-End>', 'G', { desc = 'Ir para o fim do arquivo' })
-map('n', '<C-w><C-w>', '<C-w><C-w>', { desc = 'Navegar entre janelas' })
-map('n', '<A-q>', ':bd<CR>', { desc = 'Fechar buffer (janela) em foco' })
-map('n', '<A-w>', ':qa<CR>', { desc = 'Fechar todos os buffers/janelas' })
-map('n', '<A-S-k>', ':resize -2<CR>', { desc = 'Diminuir altura da janela' })
-map('n', '<A-S-j>', ':resize +2<CR>', { desc = 'Aumentar altura da janela' })
-map('n', '<A-S-l>', ':vertical resize -2<CR>', { desc = 'Diminuir largura da janela' })
-map('n', '<A-S-h>', ':vertical resize +2<CR>', { desc = 'Aumentar largura da janela' })
 
 --- Mapeamentos do Telescope
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Encontrar arquivos" })
@@ -164,6 +161,7 @@ map("n", "<C-Right>", ":bnext<CR>", { desc = "Próximo buffer" })
 map("n", "<C-Left>", ":bprevious<CR>", { desc = "Buffer anterior" })
 map("n", "<C-S-Right>", ":tabnext<CR>", { desc = "Próxima tab" })
 map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
+
 
 --- @mission: Configura mapeamentos de teclado para funções LSP.
 -- Adiciona o atalho <C-Space> para mostrar informações do artefato e mantém o mapeamento do mouse.

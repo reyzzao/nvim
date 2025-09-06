@@ -47,7 +47,7 @@ return {
     },
   },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Alternar Explorer (NvimTree)" },
+    { "<leader>zz", "<cmd>NvimTreeToggle<cr>", desc = "Alternar Explorer (NvimTree)" },
     { "<leader>h", function()
       update_dotfiles()
     end, desc = "Alternar arquivos ocultos" },
