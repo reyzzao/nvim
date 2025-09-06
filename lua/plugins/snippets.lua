@@ -1,4 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/snippets.lua
+-- @mission: Configura o plugin 'nvim-cmp' para usar o 'LuaSnip' e gerencia todos os snippets globais.
 
 -- Define a configuração do plugin para o LazyVim
 return {
@@ -21,7 +22,8 @@ return {
     end,
   },
 
-  -- A configuração principal dos snippets e abreviações
+
+  -- A configuração principal dos snippets
   {
     "L3MON4D3/LuaSnip",
     event = "VeryLazy",
@@ -30,7 +32,6 @@ return {
       local snip = luasnip.snippet
       local text = luasnip.text_node
       local insert = luasnip.insert_node
-      local keymap = vim.keymap.set
 
       -- Adiciona snippets ao LuaSnip
       -- O primeiro argumento é a linguagem, o segundo é uma lista de snippets
@@ -73,14 +74,18 @@ return {
           insert(3),
           text({ "end" }),
         }),
+        
+        -- #define: Suas novas abreviações como snippets. - todo: testar pra ver se vai as chave100 e chave200
+        snip({ trig = "soma_raiz100", dscr = "Função de soma" }, {
+          text("function sum100(num1, num2) {\\n  return num1 + num2;\\n}"),
+        }),
+        snip({ trig = "chave100", dscr = "Texto da abreviação" }, {
+          text("mostra a abreviacao: chave100"),
+        }),
+        snip({ trig = "chave200", dscr = "Texto da abreviação" }, {
+          text("mostra a abreviacao: chave200"),
+        }),
       })
-
-      -- Adiciona as abreviações usando a API de mapeamento de teclas - usando o prefixo: w antes da acao
-      keymap("i", "wpd", "print_debug()")
-      keymap("i", "wreq", "require('')")
-      keymap("i", "wrzj", "@Reizao_Jr")
-      keymap("i", "wsoma", "const soma = (a: number, b: number): number => a + b \n") 
-      keymap("i", "wlk", "Tutorial: [link ]() \n") 
     end,
   },
 }

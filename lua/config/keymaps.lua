@@ -32,7 +32,7 @@ map('n', '<leader>pc', function()
   local file_path = vim.fn.expand("%:p")
   vim.fn.setreg('+', file_path)
   notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
-end, { desc = 'Copiar caminho completo do arquivo' })
+end, { desc = 'Copia caminho absoluto completo do arquivo' })
 
 
 -- Mapeamento de SALVAR com verificacao de buffer
@@ -128,3 +128,10 @@ map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
 --- Maps IA Gemini
 map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
 map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
+
+-- abrevicoes rapidas funcionando - configurar: após iabbrev a proxima sera a chave e a proxima sera a inserçao
+-- uso: ao digitar a chave dê espaço que a abrevicao sera inserida.
+-- todo: só nao consegui ainda pular a linha no etxto inserido mesmo add \n .
+vim.cmd("iabbrev chave1 mostra a abreviacao: chave1")
+vim.cmd("iabbrev chave2 mostra a abreviacao: chave2")
+vim.cmd("iabbrev soma_raiz function sum(num1, num2) {\\n  return num1 + num2;\\n}")
