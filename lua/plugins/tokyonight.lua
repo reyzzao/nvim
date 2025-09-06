@@ -1,32 +1,24 @@
--- ~/.config/nvim/lua/plugins/dracula.lua
-
--- Configura o plugin Dracula para Neovim e aplica destaques personalizados.
+-- @file: ~/.config/nvim/lua/plugins/tokyonight.lua
+-- @mission: Instala e configura o tema Tokyo Night com o sabor Night.
 
 return {
-  "dracula/vim", -- Repositório oficial do tema Dracula para Vim/Neovim
-  name = "dracula", -- Nome do plugin (importante para o LazyVim)
-  priority = 1000,   -- Garante que o colorscheme seja carregado cedo
-
-  -- Use 'init' para definir opções muito cedo, antes que outros plugins possam interferir.
-  init = function()
-    -- Ativa o suporte a cores verdadeiras (true colors) no terminal.
-    -- É bom ter certeza de que esta linha está ativa em algum lugar da sua configuração,
-    -- preferencialmente em lua/config/options.lua.
-    vim.opt.termguicolors = true
-  end,
-
-  config = function()
-    -- Define o Dracula como o colorscheme ativo.
-    -- É crucial que esta linha seja executada para aplicar o tema.
-    -- vim.cmd.colorscheme "dracula" -- #define : o tema em uso - descomente para funcionar.
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {
+    style = "storm", -- sabores_disponiveis: [ night , day, moon, storm ]
+  },
+  config = function(_, opts)
+    vim.cmd.colorscheme "tokyonight" -- #define o tema/colorscheme em uso
+    require("tokyonight").setup(opts)
 
     -- Define a cor de fundo personalizada.
     -- Esta cor será aplicada *depois* que o colorscheme Dracula for carregado.
-    local custom_background_hex = "#0d1017" -- #editable - aqui muda a cor de fundo deste tema
+    local custom_background_hex = "#0d1017" -- #todo: #editable - aqui muda a cor de fundo deste tema
     -- local custom_background_hex = "#a6054b" -- Cor rosa de fundo para test - descomente apra testar e comente a de cima.
-
+    -- cores_dark: [#010206, #0d1017]
     -- Aplica a cor de fundo personalizada para os grupos de destaque relevantes.
-    -- Isso sobrescreve as configurações de fundo do Dracula.
+    -- Isso sobrescreve as configurações de fundo do tema.
     vim.cmd("highlight Normal guibg=" .. custom_background_hex)
     vim.cmd("highlight NormalFloat guibg=" .. custom_background_hex)
     vim.cmd("highlight EndOfBuffer guibg=" .. custom_background_hex)
@@ -45,5 +37,6 @@ return {
     vim.cmd("highlight TabLine guibg=" .. custom_background_hex)
     vim.cmd("highlight TabLineFill guibg=" .. custom_background_hex)
     vim.cmd("highlight TabLineSel guibg=" .. custom_background_hex)
+
   end,
 }

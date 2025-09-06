@@ -1,21 +1,8 @@
 -- @file: ~/.config/nvim/lua/lsp/servers.lua
+-- @mission: Configura os servidores de linguagem (LSP) para diferentes tipos de arquivos.
 
 local lspconfig = require('lspconfig')
-
---- Anexa o comportamento e as configurações específicas a um buffer
-    
-    -- Autocmd para formatar no save, se o servidor oferecer essa capacidade
-    vim.api.nvim_create_autocmd('BufWritePre', {
-        group = vim.api.nvim_create_augroup('LspFormatOnSave', { clear = true }),
-        buffer = bufnr,
-        callback = function()
-            -- Apenas formata se o servidor tiver a capacidade de formatação
-            if client.server_capabilities.documentFormattingProvider or client.server_capabilities.documentRangeFormattingProvider then
-                vim.lsp.buf.format({ async = true, buf = bufnr })
-            end
-        end,
-        desc = 'Auto-format on save via LSP',
-    })
+local functions = require('config.functions')
 
 --- Configuração dos Language Servers ---
 
@@ -27,13 +14,13 @@ lspconfig.denols.setup({
         unstable = true,
     },
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", ".git"),
-    on_attach = on_attach_default,
+    on_attach = functions.on_attach_default,
     filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'json', 'jsonc', 'markdown' },
 })
 
 -- Configura o Lua com o Lua-LS.
 lspconfig.lua_ls.setup({
-    on_attach = on_attach_default,
+    on_attach = functions.on_attach_default,
     settings = {
         Lua = {
             runtime = {
