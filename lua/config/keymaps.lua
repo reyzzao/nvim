@@ -9,7 +9,7 @@ local functions = require('config.functions')
 --- Mapeamentos de EDIÇÃO
 
 map("n", "<leader>U", functions.toggle_case, { desc = "Alternar caixa da palavra" })
-map("n", "<leader>e", ':Ex<CR>', { desc = "explorer nativo netwr" })
+map("n", "<leader>xe", ':Ex<CR>', { desc = "explorer nativo netwr" })
 
 map('n', '<C-Down>', 'yyP', { desc = 'Duplicar linha' })
 map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
