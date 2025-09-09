@@ -39,3 +39,28 @@ lspconfig.lua_ls.setup({
         },
     },
 })
+
+-- Configura o Go com o gopls.
+-- @mission: Habilita o LSP para Go (gopls).
+-- Depende de: gopls e gofumpt.
+lspconfig.gopls.setup({
+    on_attach = functions.on_attach_default,
+    settings = {
+        gopls = {
+            hints = {
+                assignVariableTypes = true,
+                compositeLiterals = true,
+                constantValues = true,
+                functionTypeSignature = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            },
+            analyses = {
+                fieldalignment = true,
+                shadow = true,
+                unusedparams = true,
+            },
+            gofumpt = true,
+        },
+    },
+})
