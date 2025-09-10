@@ -74,8 +74,8 @@ map('i', '<A-l>', '<Esc>V', { desc = 'Selecionar linha atual (modo inserção)' 
 map('n', '<C-Home>', 'gg', { desc = 'Ir para o inicio do arquivo' })
 map('n', '<C-End>', 'G', { desc = 'Ir para o fim do arquivo' })
 map('n', '<C-w><C-w>', '<C-w><C-w>', { desc = 'Navegar entre janelas' })
-map('n', '<A-q>', ':bd<CR>', { desc = 'Fechar buffer (janela) em foco' })
-map('n', '<A-w>', ':qa<CR>', { desc = 'Fechar todos os buffers/janelas' })
+map('n', '<A-w>', ':bd<CR>', { desc = 'Fechar buffer (janela) em foco' })
+map('n', '<A-q>', ':qa<CR>', { desc = 'Fechar TODOS os buffers/janelas e kill editor' })
 -- resize
 map('n', '<S-k>', ':resize -2<CR>', { desc = 'Diminuir altura da janela' })
 map('n', '<S-j>', ':resize +2<CR>', { desc = 'Aumentar altura da janela' })
