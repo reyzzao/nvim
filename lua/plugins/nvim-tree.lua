@@ -1,5 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/nvim-tree.lua
--- @mission: Configura o plugin nvim-tree, garantindo que o explorador de arquivos comece aberto, as pastas sejam expandidas e a navegação seja mantida.
+-- @mission: Configura o nvim-tree para funcionar como o 'snacks_explorer', abrindo do lado direito e mantendo-se aberto após a seleção de arquivos, com atalhos personalizados.
 
 return {
   "nvim-tree/nvim-tree.lua",
@@ -8,12 +8,17 @@ return {
     view = {
       -- Largura do navegador de arquivos
       width = 40,
-      side = "right", -- lado do explorer, opcoes: [ right, left ]
+      -- Lado em que o explorador de arquivos será exibido (direito, como você pediu)
+      side = "right",
     },
     renderer = {
-      -- Exibe ícones para os arquivos
       icons = {
-        -- A opção 'show_only_dirs' foi removida, então a linha abaixo foi excluída.
+        glyphs = {
+          folder = {
+            arrow_open = "",
+            arrow_closed = "",
+          },
+        },
       },
     },
     update_focused_file = {
@@ -27,7 +32,8 @@ return {
     },
     actions = {
       open_file = {
-        quit_on_open = false, -- NÃO fecha o nvim-tree quando um arquivo é aberto
+        -- NÃO fecha o nvim-tree quando um arquivo é aberto
+        quit_on_open = false,
         resize_window = false,
         window_picker = {
           enable = true,
@@ -42,22 +48,16 @@ return {
   config = function(_, opts)
     require("nvim-tree").setup(opts)
 
-    -- Mapeamentos de atalhos para controlar o nvim-tree
-    vim.keymap.set("n", "<A-e>", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Alternar NvimTree" })
-    vim.keymap.set("n", "<leader>f", ":NvimTreeFindFile<CR>", { noremap = true, silent = true, desc = "Mostrar arquivo atual" })
+    -- Remove os mapeamentos de atalhos padrão do nvim-tree
+    vim.keymap.del("n", "<leader>fe")
+    vim.keymap.del("n", "<leader>fE")
 
-    -- Comando para garantir que o nvim-tree abra automaticamente e expanda o diretório
-    vim.api.nvim_create_autocmd("VimEnter", {
-      group = vim.api.nvim_create_augroup("NvimTreeOpen", { clear = true }),
-      callback = function()
-        -- Abre a árvore se não houver argumentos (ou seja, não abriu um arquivo específico)
-        local has_args = #vim.fn.argv() > 0
-        if not has_args then
-          vim.cmd("NvimTreeOpen")
-          vim.cmd("NvimTreeToggle") -- Fecha a janela atual para reabrir
-          vim.cmd("NvimTreeOpen")   -- Abre a janela novamente
-        end
-      end,
-    })
+    -- Define os novos mapeamentos de atalhos
+    -- <leader>e: para navegação DENTRO do projeto (nvim-tree)
+    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Explorar no projeto (dentro do CWD)" })
+    -- <leader>E: para navegação FORA do projeto (netrw)
+    vim.keymap.set("n", "<leader>E", ":Ex<CR>", { noremap = true, silent = true, desc = "Explorar fora do projeto (netrw)" })
+    -- <leader>f: Encontra o arquivo atual no explorador
+    vim.keymap.set("n", "<leader>f", ":NvimTreeFindFile<CR>", { noremap = true, silent = true, desc = "Mostrar arquivo atual" })
   end,
 }

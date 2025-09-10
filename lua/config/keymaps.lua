@@ -54,12 +54,14 @@ map('v', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
 map({ 'n', 'v' }, '<C-S-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' })
 map({ 'n', 'v' }, '<C-S-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
 map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
+  map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
 
 map('n', '<C-z>', 'u', { desc = 'Desfazer' })
 map('i', '<C-z>', '<Esc>ui', { desc = 'Desfazer (modo inserção)' })
-map('n', '<C-r>', '<C-r>', { desc = 'Refazer' })
-map('i', '<C-r>', '<Esc><C-r>i', { desc = 'Refazer (modo inserção)' })
-map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
+
+map('n', '<C-S-z>', '<C-r>', { desc = 'Refazer (VSCodium)' })
+map('i', '<C-S-z>', '<Esc><C-r>i', { desc = 'Refazer (VSCodium - modo inserção)' })
+
 
 --- linha
 map('n', '<A-d>', 'dd', { desc = 'Deletar linha' })
