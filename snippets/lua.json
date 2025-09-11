@@ -1,4 +1,9 @@
 {
+  "divid": {
+    "prefix": "divid",
+    "body": ["", "-- ----------------------------------------------------", ""],
+    "description": "divid"
+  },
   "noformat": {
     "prefix": "noformat",
     "body": ["-- @NoFormatOnSave"],

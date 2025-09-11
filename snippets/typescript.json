@@ -1,4 +1,9 @@
 {
+  "divid": {
+    "prefix": "divid",
+    "body": ["", "// ----------------------------------------------------", ""],
+    "description": "divid"
+  },
   "noformat": {
     "prefix": "noformat",
     "body": ["// @NoFormatOnSave"],
@@ -69,12 +74,6 @@
     "prefix": "auto export classe controller",
     "body": ["export default new ${1}()"],
     "description": "auto export classe controller"
-  },
-
-  "divid": {
-    "prefix": "divid",
-    "body": ["", "/* ---------------------- // ---------------------- */", "/* $0 */", "//"],
-    "description": "divid"
   },
 
   "tipagem js": {
