@@ -8,12 +8,27 @@
 -- Ui
 vim.cmd([[ set guicursor= ]]) -- deixar cursor estilo : IBeam
 -- vim.cmd("set guicursor=n-v-c-i-sm:block,r-cr:hor,o:hor") -- deixar cursor estilo : IBeam -- todo: nao funciona da erro.
-vim.opt.cursorline = true -- mostra a linha que o cursor esta em cor
+
+-- Linha onde esta o cursor : TODO : NAO ESTA FUNCIONANDO COM O TEMA TOKYONIGHT
+vim.opt.cursorline = true --ESTA LINHA COLOCO NO TEMA EM USO : Habilita a exibição do fundo da linha do cursor 
+vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None') -- Define a cor de fundo da linha do cursor como laranja
+vim.opt.cursorlineopt = 'both' -- Define as opções de exibição do fundo da linha do cursor opcoes [ 'both' = ambos/todos, 'line'= na linha atual, 'block' = na coluna atual ]
+
+-- vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None')
+-- vim.o.cursorline = true
+
+
+
+
+
+-- vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None')
+-- vim.o.cursorline = true
 
 local font_formal = os.getenv("USE_FONT_IN_EDITOR") or "Fira Code" -- controlado em mybash : # @file: ~/.bash_aliases
 
 vim.opt.guifont = font_formal .. ":h18" -- define tamanho da font
 vim.opt.linespace = 6 -- Define o espaço extra entre as linhas (em pixels), como depende da font usando 6 ficou bom para Fira Code , inspiracao: no vscode é 1.5 por padrao, obs: por enquanto nao aceita numero flutuante aqui #evite_erros.
+
 
 vim.opt.nu = true        -- Número de linha
 vim.opt.relativenumber = true -- Números relativos

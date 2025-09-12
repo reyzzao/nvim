@@ -5,3 +5,4 @@
 
 -- Missão: Chamar o loader do LazyVim.
 require("config.lazy")
+

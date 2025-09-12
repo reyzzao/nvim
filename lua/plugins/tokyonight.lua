@@ -13,6 +13,9 @@ return {
     require("tokyonight").setup(opts)
     vim.cmd.colorscheme "tokyonight"
 
+    -- add options
+    vim.opt.cursorline = true -- habilita o meu options a configurar para uso a cor da linha onde esta o cursor
+
     -- Remove o sombreamento das janelas inativas para que o fundo seja consistente.
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -23,4 +26,7 @@ return {
     vim.api.nvim_set_hl(0, "NvimTreeFolderIcon", { fg = "#0c0c78" })
 
   end,
+
+  
+  
 }
