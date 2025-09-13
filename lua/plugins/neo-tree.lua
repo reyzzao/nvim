@@ -15,6 +15,7 @@ return {
       function()
         require("neo-tree.command").execute({
           toggle = true,
+          position = "right",
           source = "filesystem",
           dir = vim.fn.expand("~")
         })
@@ -26,6 +27,7 @@ return {
       function()
         require("neo-tree.command").execute({
           toggle = true,
+          position = "right",
           source = "filesystem",
           dir = vim.fn.expand('%:p:h')
         })
@@ -35,29 +37,51 @@ return {
   },
   opts = {
     window = {
-      position = "right", -- [ "float", "right"]
+      position = "right",
     },
     filesystem = {
       filtered_items = {
         visible = true,
+        hide_dotfiles = false,
+        hide_git_ignored = false,
+        hide_hidden = false,
       },
       follow_current_file = {
         enabled = true,
         open_tree = true,
       },
+      group_empty_dirs = false,
     },
     renderer = {
       icons = {
-        -- Usa ícones padrão de pastas
         folder = {
           arrow_closed = "",
           arrow_open = "",
         },
       },
-      -- Habilita as linhas da árvore para exibir a hierarquia
       tree_lines = {
         with_indents = true,
+        ordering = "top_down",
+        fold_level = false,
       },
     },
   },
+  config = function()
+    require("neo-tree").setup({})
+
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
+      group = vim.api.nvim_create_augroup("NeoTreeAutoOpen", { clear = true }),
+      callback = function()
+        local is_file = vim.api.nvim_get_option_value("buftype", { scope = "local" }) == ""
+        if is_file then
+          require("neo-tree.command").execute({
+            action = "toggle_focus",
+            position = "right",
+            source = "filesystem",
+            dir = vim.fn.expand("%:p:h")
+          })
+        end
+      end,
+    })
+  end,
 }

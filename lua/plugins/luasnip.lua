@@ -33,7 +33,7 @@ return {
       desc = "Pular para placeholder anterior",
     },
     {
-      "<leader>ps",
+      "<leader>pn",
       function()
         require("luasnip").expand()
       end,

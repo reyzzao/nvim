@@ -54,7 +54,7 @@ map('v', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
 map({ 'n', 'v' }, '<C-S-c>', '"+y', { desc = 'Copiar para o clipboard do sistema' })
 map({ 'n', 'v' }, '<C-S-v>', '"+p', { desc = 'Colar do clipboard do sistema' })
 map({ 'n', 'v' }, '<C-x>', '"+d', { desc = 'Recortar para o clipboard do sistema' })
-  map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
+map('n', '<C-a>', 'ggVG', { desc = 'Selecionar todo o conteúdo do arquivo' })
 
 map('n', '<C-z>', 'u', { desc = 'Desfazer' })
 map('i', '<C-z>', '<Esc>ui', { desc = 'Desfazer (modo inserção)' })
@@ -69,6 +69,12 @@ map('i', '<A-d>', '<Esc>dd', { desc = 'Deletar linha' })
 map('v', '<A-d>', 'd', { desc = 'Deletar linha' })
 map('n', '<A-l>', 'V', { desc = 'Selecionar linha atual' })
 map('i', '<A-l>', '<Esc>V', { desc = 'Selecionar linha atual (modo inserção)' })
+
+-- Mover linha para cima e para baixo
+map("n", "<A-Down>", ":m .+1<CR>==", { desc = "Mover linha para baixo" })
+map("n", "<A-Up>", ":m .-2<CR>==", { desc = "Mover linha para cima" })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Mover bloco para baixo" })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Mover bloco para cima" })
 
 --- Mapeamentos de Movimentação
 map('n', '<C-Home>', 'gg', { desc = 'Ir para o inicio do arquivo' })
@@ -129,9 +135,10 @@ map("n", "<C-S-Right>", ":tabnext<CR>", { desc = "Próxima tab" })
 map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
 
 
---- Maps IA Gemini
--- map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
--- map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
+-- --- Maps IA Gemini
+-- Mapeamento para abrir um prompt para o Gemini em modo normal >> plugin gen.nvim
+vim.keymap.set("n", "<C-i>", "<cmd>lua require('gen').prompt_buffer()<CR>", { desc = "Gen: Abrir prompt para AI" })
+vim.keymap.set("v", "<C-k>", "<cmd>lua require('gen').prompt_visual()<CR>", { desc = "Gen: Usar selecao como prompt" })
 
 -- abrevicoes rapidas funcionando - configurar: após iabbrev a proxima sera a chave e a proxima sera a inserçao
 -- uso: ao digitar a chave dê espaço que a abrevicao sera inserida.
