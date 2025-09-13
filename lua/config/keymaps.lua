@@ -93,6 +93,8 @@ map('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP: Ir para definição' })
 map('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP: Ir para declaração' })
 map('n', 'gr', vim.lsp.buf.references, { desc = 'LSP: Ir para referências' })
 map('n', 'gi', vim.lsp.buf.implementation, { desc = 'LSP: Ir para implementação' })
+map('n', 'K', vim.lsp.buf.hover, { desc = 'LSP: Inspecionar Hover' })
+
 map('n', '<leader>r', vim.lsp.buf.rename, { desc = 'LSP: Renomear símbolo' })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: Code Action' })
 map({ "n", "v" }, "<leader>f", function()
@@ -128,8 +130,8 @@ map("n", "<C-S-Left>", ":tabprevious<CR>", { desc = "Tab anterior" })
 
 
 --- Maps IA Gemini
-map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
-map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
+-- map({ 'n' }, '<leader>pG', ':GeminiPrompt<CR>', { desc = 'Prompt Gemini' })
+-- map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
 
 -- abrevicoes rapidas funcionando - configurar: após iabbrev a proxima sera a chave e a proxima sera a inserçao
 -- uso: ao digitar a chave dê espaço que a abrevicao sera inserida.
@@ -137,3 +139,14 @@ map({ 'v' }, '<leader>pg', ':GeminiCode<CR>', { desc = 'Gerar com Codigo' })
 vim.cmd("iabbrev chave1 mostra a abreviacao: chave1")
 vim.cmd("iabbrev chave2 mostra a abreviacao: chave2")
 vim.cmd("iabbrev soma_raiz function sum(num1, num2) {\\n  return num1 + num2;\\n}")
+
+-- Seleção com Shift e Setas
+map("n", "<S-Up>", "V", { desc = "Selecionar linha" })
+map("n", "<S-Down>", "V", { desc = "Selecionar linha" })
+map("n", "<S-Left>", "v", { desc = "Selecionar caractere" })
+map("n", "<S-Right>", "v", { desc = "Selecionar caractere" })
+
+map("v", "<S-Up>", ":<C-u>normal! ^k<CR>", { desc = "Selecionar para cima" })
+map("v", "<S-Down>", ":<C-u>normal! ^j<CR>", { desc = "Selecionar para baixo" })
+map("v", "<S-Left>", "<left>", { desc = "Selecionar para esquerda" })
+map("v", "<S-Right>", "<right>", { desc = "Selecionar para direita" })

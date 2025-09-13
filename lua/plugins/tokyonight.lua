@@ -1,5 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/tokyonight.lua
--- @mission: Instala e configura o tema Tokyo Night com o sabor Night.
+-- @mission: Instala e configura o tema Tokyo Night e os destaques de diagnóstico.
 
 return {
   "folke/tokyonight.nvim",
@@ -13,20 +13,20 @@ return {
     require("tokyonight").setup(opts)
     vim.cmd.colorscheme "tokyonight"
 
-    -- add options
-    vim.opt.cursorline = true -- habilita o meu options a configurar para uso a cor da linha onde esta o cursor
-
     -- Remove o sombreamento das janelas inativas para que o fundo seja consistente.
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
     
     -- Muda a cor do "hover" (destaque do cursor) no nvim-tree
-    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#0c0c78" })
-    vim.api.nvim_set_hl(0, "NvimTreeFolderIcon", { fg = "#0c0c78" })
-
+    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#2d2d3e" })
+    vim.api.nvim_set_hl(0, "NvimTreeFolderIcon", { fg = "#5E81AC" })
+    
+    -- Configuração para mostrar o erro na linha em vermelho
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { fg = "NONE", sp = "red", undercurl = true, underline = true })
+    vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#E06C75", bold = true })
+    
+    -- Muda a cor do cursor (hover) no Neo-tree
+    vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = "#2d2d3e", fg = "none" })
   end,
-
-  
-  
 }
