@@ -27,8 +27,8 @@ map('n', '<leader>q', function()
   vim.cmd('qa!')
 end, { desc = 'Fechar o Neovim e salvar sessao com :qa!' })
 
---- Mapeamentos de COPIAR/RECORTAR/COLAR
-map('n', '<leader>pc', function()
+--- Mapeamentos de COPIAR/RECORTAR/COLAR  
+map('n', '<A-p>', function()
   local file_path = vim.fn.expand("%:p")
   vim.fn.setreg('+', file_path)
   notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
@@ -157,3 +157,22 @@ map("v", "<S-Up>", ":<C-u>normal! ^k<CR>", { desc = "Selecionar para cima" })
 map("v", "<S-Down>", ":<C-u>normal! ^j<CR>", { desc = "Selecionar para baixo" })
 map("v", "<S-Left>", "<left>", { desc = "Selecionar para esquerda" })
 map("v", "<S-Right>", "<right>", { desc = "Selecionar para direita" })
+
+--- Maps IA Gemini
+vim.keymap.set("n", "<leader>ai", function()
+    local gemini = require("gemini")
+    vim.ui.input({ prompt = "Consulta para o Gemini: " }, function(query)
+        if not query or #query == 0 then
+            return
+        end
+        vim.notify("Gerando resposta... Aguarde...", vim.log.levels.INFO, { title = "Gemini.nvim" })
+        local response = gemini.prompt(query)
+        if response and response.result and response.result.candidates and response.result.candidates[1] then
+            local text = response.result.candidates[1].content.parts[1].text
+            vim.api.nvim_buf_set_lines(0, vim.api.nvim_buf_line_count(0), -1, false, { " ", "-- Resposta do Gemini:", " ", text })
+            vim.notify("Resposta gerada!", vim.log.levels.INFO, { title = "Gemini.nvim" })
+        else
+            vim.notify("Erro ao gerar resposta.", vim.log.levels.ERROR, { title = "Gemini.nvim" })
+        end
+    end)
+end, { desc = "Gemini: Pergunta com contexto do arquivo" })
