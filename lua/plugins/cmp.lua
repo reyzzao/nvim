@@ -1,5 +1,5 @@
--- ~/.config/nvim/lua/plugins/cmp.lua
--- @mission: Configura o nvim-cmp para que o pop-up de auto completar  #complete não seja exibido automaticamente. O pop-up só será ativado quando o usuário pressionar Ctrl + Espaço.
+-- @file: ~/.config/nvim/lua/plugins/cmp.lua
+-- @mission: Configura o nvim-cmp para que o pop-up de auto completar só seja exibido ao pressionar Ctrl + Espaço, forçando um alto valor para min_chars.
 
 return {
   'hrsh7th/nvim-cmp',
@@ -12,6 +12,9 @@ return {
     'hrsh7th/cmp-path',
   },
   config = function()
+    -- ESSENCIAL: Garante que o Neovim use o modo passivo para autocompletar.
+    vim.opt.completeopt = "menuone,noinsert,noselect" 
+
     local cmp = require('cmp')
     local ls = require('luasnip')
 
@@ -47,10 +50,10 @@ return {
         end, { 'i', 's' }),
       }),
       sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
+        { name = 'nvim_lsp', min_chars = 99 }, 
+        { name = 'luasnip', min_chars = 99 },
+        { name = 'buffer', min_chars = 99 },
+        { name = 'path', min_chars = 99 },
       }),
       formatting = {
         format = function(entry, vim_item)
@@ -66,7 +69,9 @@ return {
         documentation = cmp.config.window.bordered(),
       },
       completion = {
-        autocomplete = false, -- Desativa o pop-up automático
+        autocomplete = false,
+        auto_select = false, 
+        trigger_characters = {}, 
       },
     })
   end,

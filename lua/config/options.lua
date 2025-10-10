@@ -17,10 +17,6 @@ vim.opt.cursorlineopt = 'both' -- Define as opções de exibição do fundo da l
 -- vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None')
 -- vim.o.cursorline = true
 
-
-
-
-
 -- vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None')
 -- vim.o.cursorline = true
 
@@ -32,8 +28,8 @@ vim.opt.linespace = 6 -- Define o espaço extra entre as linhas (em pixels), com
 
 vim.opt.nu = true        -- Número de linha
 vim.opt.relativenumber = true -- Números relativos
-vim.opt.tabstop = 4      -- Tamanho do tab
-vim.opt.shiftwidth = 4   -- Espaços para indentação
+vim.opt.tabstop = 2      -- Tamanho do tab
+vim.opt.shiftwidth = 2   -- Espaços para indentação
 vim.opt.expandtab = true -- Usa espaços ao invés de tabs
 vim.opt.smartindent = true -- Indentação inteligente
 vim.opt.wrap = false     -- Não quebra linha
