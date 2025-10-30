@@ -1,5 +1,5 @@
 -- @file: ~/.config/nvim/lua/plugins/neo-tree.lua
--- @mission: Explorer de arquivos flutuante com atalhos e posicoes personalizadas, garantindo a exibicao correta dos diretorios.
+-- @mission: Explorer de arquivos com atalhos e mapeamento de 'm' para mover o item marcado para o diretorio pai.
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
@@ -10,8 +10,9 @@ return {
     "MunifTanjim/nui.nvim",
   },
   keys = {
+    -- Seu atalho Alt-e para Home
     {
-      "<A-r>",
+      "<A-e>",
       function()
         require("neo-tree.command").execute({
           toggle = true,
@@ -22,8 +23,9 @@ return {
       end,
       desc = "NeoTree: Navegar fora do projeto",
     },
+    -- Seu atalho E para o projeto
     {
-      "<A-e>",
+      "E",
       function()
         require("neo-tree.command").execute({
           toggle = true,
@@ -65,6 +67,28 @@ return {
         fold_level = false,
       },
     },
+    
+    -- *** ATALHOS DE MANIPULACAO (FINAL E SIMPLIFICADO) ***
+    commands = {
+      -- Comandos que funcionam sem prompt:
+      ["a"] = "create",          -- A: Criar (Arquivo ou Diretorio)
+      ["r"] = "rename",          -- R: Renomear
+      ["y"] = "copy",            -- Y: Copiar (Marca para Copiar/Yank)
+      ["d"] = "delete",          -- D: Deletar (Lixeira/Trash)
+      
+      -- *** NOVO FLUXO DE MOVER ***
+      -- Mover (m) sera para mover para o diretorio pai (UP).
+      -- Use 'y' (copiar) e 'p' (colar) para mover entre pastas.
+      -- A acao 'paste' (p) ira COPIAR/MOVER o item marcado para onde o cursor esta.
+      ["m"] = "move_to_parent",  -- M: Mover para o DIRETÓRIO PAI (UP)
+      ["p"] = "paste",           -- P: Colar (Cola o item copiado 'y' ou recortado 'm')
+      
+      -- Atalhos Uteis
+      ["<leader>e"] = "open_with_system", -- Abrir com o aplicativo padrao do SO
+      ["<C-l>"] = "refresh",             -- Recarregar a arvore
+      ["g."] = "toggle_hidden",          -- Mostrar/Esconder arquivos ocultos
+      ["H"] = "toggle_hidden",           -- Atalho alternativo para mostrar/esconder
+    },
   },
   config = function()
     require("neo-tree").setup({})
@@ -72,8 +96,9 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
       group = vim.api.nvim_create_augroup("NeoTreeAutoOpen", { clear = true }),
       callback = function()
-        local is_file = vim.api.nvim_get_option_value("buftype", { scope = "local" }) == ""
-        if is_file then
+        -- Verificacao para nao abrir em buffers como terminal ou quickfix
+        local buftype = vim.api.nvim_get_option_value("buftype", { scope = "local" })
+        if buftype == "" or buftype == "acwrite" then
           require("neo-tree.command").execute({
             action = "toggle_focus",
             position = "right",

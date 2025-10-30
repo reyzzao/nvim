@@ -9,11 +9,11 @@
 vim.cmd([[ set guicursor= ]]) -- deixar cursor estilo : IBeam
 -- vim.cmd("set guicursor=n-v-c-i-sm:block,r-cr:hor,o:hor") -- deixar cursor estilo : IBeam -- todo: nao funciona da erro.
 
--- Linha onde esta o cursor : TODO : NAO ESTA FUNCIONANDO COM O TEMA TOKYONIGHT
-vim.opt.cursorline = true                                 --ESTA LINHA COLOCO NO TEMA EM USO : Habilita a exibição do fundo da linha do cursor
-vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None') -- Define a cor de fundo da linha do cursor como laranja
-vim.opt.cursorlineopt =
-'both'                                                    -- Define as opções de exibição do fundo da linha do cursor opcoes [ 'both' = ambos/todos, 'line'= na linha atual, 'block' = na coluna atual ]
+-- Habilita a exibição do fundo da linha do cursor
+vim.opt.cursorline = true
+-- Mantem a opcao (embora 'line' seja suficiente, 'both' inclui a coluna, se habilitada)
+vim.opt.cursorlineopt = 'line' -- Mudei para 'line' para foco na linha, mas 'both' tambem funciona
+-- 2. O Hook de Cor (Corrigindo a Cor para TokyoNight):
 
 -- vim.cmd('highlight CursorLine ctermbg=Yellow cterm=None')
 -- vim.o.cursorline = true
