@@ -14,19 +14,20 @@ return {
   },
 
   -- mason.nvim: Gerenciador de Language Servers, formatadores e linters
-  { 'williamboman/mason.nvim',
+  { 'mason-org/mason.nvim',
     config = function()
       require('mason').setup()
     end,
   },
 
   -- mason-lspconfig.nvim: Integração do Mason com o nvim-lspconfig
-  { 'williamboman/mason-lspconfig.nvim',
+  { 'mason-org/mason-lspconfig.nvim',
     config = function()
       require('mason-lspconfig').setup {
         ensure_installed = {
           "denols",    -- Para Deno (TypeScript/JavaScript)
           "lua_ls",    -- Para Lua
+          "dartls",    -- -- <--- Correto para LSP!
         },
       }
     end,
