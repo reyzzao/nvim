@@ -27,7 +27,7 @@ return {
         ensure_installed = {
           "denols",    -- Para Deno (TypeScript/JavaScript)
           "lua_ls",    -- Para Lua
-          "dartls",    -- -- <--- Correto para LSP!
+          "dart_ls",    -- -- <--- Correto para LSP!
         },
       }
     end,

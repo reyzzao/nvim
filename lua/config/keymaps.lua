@@ -14,7 +14,7 @@ map("n", "<leader>xe", ':Ex<CR>', { desc = "explorer nativo netwr" })
 map('n', '<C-Down>', 'yyP', { desc = 'Duplicar linha' })
 map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
 
---- Prefixo: leader + p
+--- Prefixo: leader + p de projeto atalho padrao rzj
 map('n', '<leader>ph', functions.InsertHeader, { desc = 'Insere endereço relativo do arquivo.' })
 map('n', '<leader>pm', ':messages<CR>', { desc = 'Mostra mensagens' })
 map("n", "<leader>prc", function()
@@ -26,6 +26,10 @@ map('n', '<leader>q', function()
   require('persistence').save()
   vim.cmd('qa!')
 end, { desc = 'Fechar o Neovim e salvar sessao com :qa!' })
+-- NOVO MAPA: Ver Snippets Disponíveis
+vim.keymap.set('n', '<leader>pls', '<cmd>LuaSnipListAvailable<CR>', { desc = 'Mostra Lista de Snippets' })
+
+--- -------------------------------------------
 
 --- Mapeamentos de COPIAR/RECORTAR/COLAR  
 map('n', '<A-p>', function()

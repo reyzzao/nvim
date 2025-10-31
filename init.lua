@@ -12,6 +12,7 @@ require("lazy").setup("plugins")
 require("config.custom_highlights")
 
 -- 3. Outras Configuracoes
+require("config.ProductivityUtils")
 require("config.diagnostics")
 
 

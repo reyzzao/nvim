@@ -1,37 +1,38 @@
 {
+  // importante: usando prefixo `snp_` para encontrar os snippets
   "divid": {
-    "prefix": "divid",
+    "prefix": "snp_divid",
     "body": ["", "// ----------------------------------------------------", ""],
     "description": "divid"
   },
   "noformat": {
-    "prefix": "noformat",
+    "prefix": "snp_noformat",
     "body": ["// @NoFormatOnSave"],
     "description": "noformat"
   },
   "fileName": {
-    "prefix": "fileName",
+    "prefix": "snp_fileName",
     "body": ["// @file: ${1}", ""],
     "description": "fileName"
   },
   "console": {
-    "prefix": "console",
+    "prefix": "snp_console",
     "body": "console.log('$1');",
     "description": "console log TS"
   },
-  "Arrow Function": {
-    "prefix": "afn",
+  "Arrow_Function": {
+    "prefix": "snp_funcao",
     "body": "const $1 = ($2) => {\n\t$3\n};",
     "description": "Arrow Function"
   },
   "fn_soma": {
-    "prefix": "fn_soma",
+    "prefix": "snp_fn_soma",
     "body": "function soma(a, b) {\n\treturn a + b;\n}",
     "description": "fn_soma"
   },
 
   "decisoes_switch_case": {
-    "prefix": "decisoes_switch_case",
+    "prefix": "snp_decisoes_switch_case",
     "body": [
       "/**",
       " * @mission: Realiza a seleção de um resultado com base em um valor de entrada.",
@@ -52,8 +53,8 @@
     ],
     "description": "decisoes_switch_case"
   },
-  "doc": {
-    "prefix": "doc",
+  "jsdoc": {
+    "prefix": "snp_jsdoc",
     "body": [
       "/**",
       " * @description: _ .",
@@ -66,7 +67,7 @@
     "description": "doc para documentar artefatos [ funcoes]. "
   },
   "desc": {
-    "prefix": "desc",
+    "prefix": "snp_desc",
     "body": ["// @desc: ${1}"],
     "description": "desc insere um comentario para descricao acima do artefato"
   },
@@ -77,7 +78,7 @@
   },
 
   "tipagem js": {
-    "prefix": "type",
+    "prefix": "snp_tipagem_js",
     "body": [
       "/**",
       " * descricao :: $0",
@@ -91,55 +92,55 @@
   },
 
   "metodo__interface--ts": {
-    "prefix": "metodo__interface--ts",
+    "prefix": "snp_fn_metodo__interface--ts",
     "body": ["async ${1:metodo}: () => Promise<${2: tipo}[]>"],
     "description": "method__interface--ts"
   },
 
   "metodo__classe--ts": {
-    "prefix": "metodo__classe--ts",
+    "prefix": "snp_fn_metodo__classe--ts",
     "body": ["async ${1:metodo}(): Promise<${2: tipo}[]> {}"],
     "description": "method__interface--ts"
   },
 
   "export-modulo-classe__JS": {
-    "prefix": "export-modulo-classe__JS",
+    "prefix": "snp_export-modulo-classe__JS",
     "body": ["class ${1:modulo} {", "    constructor() {}", "}", "", "module.exports = ${1:modulo}"],
     "description": "export-modulo-classe__JS"
   },
 
   "comment": {
-    "prefix": "comment",
+    "prefix": "snp_comment",
     "body": ["/*", "* $0", "*/"],
     "description": "comment"
   },
 
   "class": {
-    "prefix": "export class - typescript",
+    "prefix": "snp_export class - typescript",
     "body": ["export class ${TM_DIRECTORY/^.+\\\\/(.*)$/$1/}$1 {", "    constructor() {}", "}"],
     "description": "class"
   },
 
   "interface": {
-    "prefix": "export interface - typescript",
+    "prefix": "snp_export interface - typescript",
     "body": ["export interface ${TM_DIRECTORY/^.+\\\\/(.*)$/$1/}$1 {$2}"],
     "description": "interface"
   },
 
   "export tudo": {
-    "prefix": "export tudo",
+    "prefix": "snp_export tudo",
     "body": ["export * from '.$1'"],
     "description": "export tudo"
   },
 
   "eslint nao usar var": {
-    "prefix": "eslint nao usar var",
+    "prefix": "snp_eslint nao usar var",
     "body": ["/* eslint-disable no-unused-vars */"],
     "description": "eslint nao usar var"
   },
 
   "objeto": {
-    "prefix": "objeto",
+    "prefix": "snp_objeto",
     "body": [
       "const ${1:objeto} = {",
       "    contexto: '',",
@@ -153,7 +154,7 @@
   },
 
   "requisito": {
-    "prefix": "requisito",
+    "prefix": "snp_requisito",
     "body": [
       "## API : $1",
       "",
@@ -168,7 +169,7 @@
   },
 
   "no-problem-export": {
-    "prefix": "no-problem-export",
+    "prefix": "snp_no-problem-export",
     "body": [
       "/* ---------------------- // ---------------------- */",
       "//",
@@ -182,7 +183,7 @@
   },
 
   "var__obj_repete": {
-    "prefix": "var__obj_repete",
+    "prefix": "snp_var__obj_repete",
     "body": ["${1:var}: `$2`,", "$3"],
     "description": "var"
   },
@@ -219,7 +220,7 @@
   },
 
   "express": {
-    "prefix": "express import",
+    "prefix": "snp_express import",
     "body": ["import { Router, Request, Response } from 'express'"],
     "description": "express import"
   },
@@ -241,13 +242,13 @@
   },
 
   "valor_novo_ou_default_coalescencia_nula": {
-    "prefix": "valor_novo_ou_default_coalescencia_nula",
+    "prefix": "snp_valor_novo_ou_default_coalescencia_nula",
     "body": ["\"novoValor\" ?? \"Ou_valorDefault\""],
     "description": "valor_novo_ou_default_coalescencia_nula"
   },
 
   "pipe_fnOBJParams_async_Generic_TS": {
-    "prefix": "pipe_fnOBJParams_async_Generic_TS",
+    "prefix": "snp_pipe_fnOBJParams_async_Generic_TS",
     "body": [
       "/**",
       " * @description  PIPE TS ASYNC DE FUNCOES QUE RECEBEM PARAMS DO TIPO OBJETO COM REGRAS.",
@@ -269,7 +270,7 @@
   },
 
   "testDeno": {
-    "prefix": "testDeno",
+    "prefix": "snp_testDeno",
     "body": [
       "// deno-lint-ignore-file no-explicit-any no-unused-vars",
       "import { expect } from \"@deps\";",
@@ -310,7 +311,7 @@
   },
 
   "assert_throw_Error_Test_DENO": {
-    "prefix": "assert_throw_Error_Test_DENO",
+    "prefix": "snp_assert_throw_Error_Test_DENO",
     "body": [
       "import { assertThrows } from \"https://deno.land/std@0.219.0/assert/mod.ts\";",
       "",
@@ -337,7 +338,7 @@
   },
 
   "deno_test_import_Assert": {
-    "prefix": "deno_test_import_Assert",
+    "prefix": "snp_deno_test_import_Assert",
     "body": [
       "import {",
       "  assert, assertThrows, assertEquals, assertExists,",
@@ -350,7 +351,7 @@
   },
 
   "testDenoSuite": {
-    "prefix": "testDenoSuite",
+    "prefix": "snp_testDenoSuite",
     "body": [
       "Deno.test({",
       "  name: \"[ FAIL ] deve retornar $1 .\",",
@@ -368,7 +369,7 @@
   },
 
   "conceito_Completo": {
-    "prefix": "conceito_Completo",
+    "prefix": "snp_conceito_Completo",
     "body": [
       "titulo: \"$1\",",
       "categorias: [\"\", \"\", ],",
@@ -384,7 +385,7 @@
   },
 
   "model_class_custom_error_ts": {
-    "prefix": "model_class_custom_error_ts",
+    "prefix": "snp_model_class_custom_error_ts",
     "body": [
       "export class $1InvalidEntity extends Error {",
       "  constructor(msg: string) {",
@@ -397,31 +398,31 @@
   },
 
   "noExport_DEFAULT_1": {
-    "prefix": "noExport_DEFAULT_1",
+    "prefix": "snp_noExport_DEFAULT_1",
     "body": ["", "export default 1", ""],
     "description": "noExport_DEFAULT_1"
   },
 
   "todo_futuro": {
-    "prefix": "todo_futuro",
+    "prefix": "snp_todo_futuro",
     "body": ["// -- #futuro::> reservado para $1  . --"],
     "description": "todo_futuro"
   },
 
   "todo_naoImplementado": {
-    "prefix": "todo_naoImplementado",
+    "prefix": "snp_todo_naoImplementado",
     "body": ["// -- #TODO: NaoImplementado --"],
     "description": "todo_naoImplementado"
   },
 
   "todo_RetornandoErro": {
-    "prefix": "todo_RetornandoErro",
+    "prefix": "snp_todo_RetornandoErro",
     "body": ["// -- #TODO: RetornandoErro --"],
     "description": "todo_RetornandoErro"
   },
 
   "todo_MelhorarNoFuturo": {
-    "prefix": "todo_MelhorarNoFuturo",
+    "prefix": "snp_todo_MelhorarNoFuturo",
     "body": ["// -- #TODO: MelhorarNoFuturo --"],
     "description": "todo_MelhorarNoFuturo"
   },
@@ -438,7 +439,7 @@
   },
 
   "decorador_de_Classe": {
-    "prefix": "decorador_de_Classe",
+    "prefix": "snp_decorador_de_Classe",
     "body": [
       "/**",
       " * @desc Criando prop <version> na classe via decorador",
