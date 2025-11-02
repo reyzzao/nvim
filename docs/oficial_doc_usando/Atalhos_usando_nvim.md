@@ -11,8 +11,11 @@
 - Abrir_Explorer_na_Home: `A-e`
 -Mover_Arquivos : `x` para recortar e `p` pra colar no destino.
 
+### Files
+- copiar_caminho_absoluto_arquivo: <leader>pu
+
 ### Utils Codando
-- AutoComplete: `C-.` Control+Ponto apra expandir sugestões de auto complete.
+- AutoComplete: `C-.` Control+Ponto para expandir sugestões de auto complete.
 - Snippets: usando o profixo: `snp_` então começe digitando este prefixo apra encontrar os snippets da linguagem. Porque:  no momento tenho que lembrar o nome da palavra chave e digita-la para inserir o snippet (Solucao colocar um prefixo na palavra chave )
 - 
 

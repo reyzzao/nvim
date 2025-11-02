@@ -1,4 +1,4 @@
--- @file: ~/.config/nvim/lua/plugins/neo-tree.lua
+-- @file: ~/endereco_relativo/neo-tree.lua
 -- @mission: Explorer de arquivos com atalhos e mapeamento de 'm' para mover o item marcado para o diretorio pai.
 
 return {
@@ -16,7 +16,7 @@ return {
       function()
         require("neo-tree.command").execute({
           toggle = true,
-          position = "right",
+          position = "left", -- Ajustado para 'left'
           source = "filesystem",
           dir = vim.fn.expand("~")
         })
@@ -29,7 +29,7 @@ return {
       function()
         require("neo-tree.command").execute({
           toggle = true,
-          position = "right",
+          position = "left", -- Ajustado para 'left'
           source = "filesystem",
           dir = vim.fn.expand('%:p:h')
         })
@@ -39,7 +39,7 @@ return {
   },
   opts = {
     window = {
-      position = "right",
+      position = "left", -- Ajuste principal: [ right = direita, left = esquerda ]
     },
     filesystem = {
       filtered_items = {
@@ -74,14 +74,12 @@ return {
       ["a"] = "create",          -- A: Criar (Arquivo ou Diretorio)
       ["r"] = "rename",          -- R: Renomear
       ["y"] = "copy",            -- Y: Copiar (Marca para Copiar/Yank)
-      ["d"] = "delete",          -- D: Deletar (Lixeira/Trash)
       
-      -- *** NOVO FLUXO DE MOVER ***
-      -- Mover (m) sera para mover para o diretorio pai (UP).
-      -- Use 'y' (copiar) e 'p' (colar) para mover entre pastas.
-      -- A acao 'paste' (p) ira COPIAR/MOVER o item marcado para onde o cursor esta.
+      ["x"] = "cut",             -- X: RECORTAR (NOVO - Marca para Recortar/Cut - Pode usar para mover recortando.)
+      
+      ["d"] = "delete",          -- D: Deletar (Lixeira/Trash)
       ["m"] = "move_to_parent",  -- M: Mover para o DIRETÓRIO PAI (UP)
-      ["p"] = "paste",           -- P: Colar (Cola o item copiado 'y' ou recortado 'm')
+      ["p"] = "paste",           -- P: Colar (Cola o item copiado 'y' ou recortado 'x')
       
       -- Atalhos Uteis
       ["<leader>e"] = "open_with_system", -- Abrir com o aplicativo padrao do SO
@@ -101,7 +99,7 @@ return {
         if buftype == "" or buftype == "acwrite" then
           require("neo-tree.command").execute({
             action = "toggle_focus",
-            position = "right",
+            position = "left", -- Ajustado para 'left' aqui tambem
             source = "filesystem",
             dir = vim.fn.expand("%:p:h")
           })

@@ -1,10 +1,11 @@
 -- @file: ~/.config/nvim/lua/config/keymaps.lua
--- @mission: Define todos os mapeamentos de teclado do editor, utilizando as funções auxiliares em 'functions.lua'.
+-- @mission: Define todos os mapeamentos de teclado do editor, utilizando as funções auxiliares em 'functions.lua' e configura nomes para os grupos no Which-key.
 
 local map = vim.keymap.set
 local log_info = vim.log.levels.INFO
 local notify = vim.notify
 local functions = require('config.functions')
+local wk_ok, wk = pcall(require, "which-key") -- Tenta carregar o which-key para nomear os grupos
 
 --- Mapeamentos de EDIÇÃO
 
@@ -14,14 +15,17 @@ map("n", "<leader>xe", ':Ex<CR>', { desc = "explorer nativo netwr" })
 map('n', '<C-Down>', 'yyP', { desc = 'Duplicar linha' })
 map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
 
---- Prefixo: leader + p de projeto atalho padrao rzj
-map('n', '<leader>ph', functions.InsertHeader, { desc = 'Insere endereço relativo do arquivo.' })
-map('n', '<leader>pm', ':messages<CR>', { desc = 'Mostra mensagens' })
-map("n", "<leader>prc", function()
+--- Prefixo: leader + p (APENAS GRUPOS) e Comandos de Acao Imediata (RAIZ)
+map('n', '<leader>h', functions.InsertHeader, { desc = 'Insere endereço relativo do arquivo.' }) -- Movido de <leader>ph
+map('n', '<leader>m', ':messages<CR>', { desc = 'Mostra mensagens' }) -- Movido de <leader>pm
+
+-- NOVO Atalho de Recarregar Configuração: <leader>rc
+map("n", "<leader>rc", function()
   vim.cmd("source " .. vim.fn.stdpath("config") .. "/init.lua")
   notify("Configuração recarregada!", log_info)
-end, { desc = "Recarregar config do Neovim" })
-map('n', '<leader>k', ':qa!<CR>', { desc = 'Fechar Kill Neovim sem salvar nada abandona!obs: auto save ligado vai salvar msm assim! #warning' })
+end, { desc = "Recarregar config do Neovim (Reload Config)" }) -- Movido de <leader>prc
+
+map('n', '<leader>k', ':qa!<CR>', { desc = 'Fechar Kill Neovim sem salvar nada abandona! #warning' })
 map('n', '<leader>q', function()
   require('persistence').save()
   vim.cmd('qa!')
@@ -29,14 +33,23 @@ end, { desc = 'Fechar o Neovim e salvar sessao com :qa!' })
 -- NOVO MAPA: Ver Snippets Disponíveis
 vim.keymap.set('n', '<leader>pls', '<cmd>LuaSnipListAvailable<CR>', { desc = 'Mostra Lista de Snippets' })
 
+-- BLOCO DE GRUPO: Atalhos de Debugger (Prefixado com <leader>pd)
+map('n', '<leader>pd', '<cmd>DapUiToggle<CR>', { desc = 'Debug: Alternar UI do DAP' })
+map('n', '<leader>pdt', '<cmd>DapTerminate<CR>', { desc = 'Debug: Terminar Sessão' })
+map('n', '<leader>pdb', '<cmd>DapToggleBreakpoint<CR>', { desc = 'Debug: Adicionar/Remover Breakpoint' })
+map('n', '<leader>pds', '<cmd>DapStepOver<CR>', { desc = 'Debug: Step Over (Próxima Linha)' })
+map('n', '<leader>pdn', '<cmd>DapStepOut<CR>', { desc = 'Debug: Step Out (Sair da Função)' })
+map('n', '<leader>pdi', '<cmd>DapStepInto<CR>', { desc = 'Debug: Step Into (Entrar na Função)' })
+map('n', '<leader>pdc', '<cmd>DapContinue<CR>', { desc = 'Debug: Continuar Execução' })
+
 --- -------------------------------------------
 
 --- Mapeamentos de COPIAR/RECORTAR/COLAR  
-map('n', '<A-p>', function()
+map('n', '<leader>u', function() -- Movido de <leader>pu
   local file_path = vim.fn.expand("%:p")
   vim.fn.setreg('+', file_path)
   notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
-end, { desc = 'Copia caminho absoluto completo do arquivo' })
+end, { desc = 'Copia caminho absoluto do arquivo' })
 
 
 -- Mapeamento de SALVAR com verificacao de buffer
@@ -51,7 +64,6 @@ end, { desc = 'Salvar arquivo' })
 
 -- edicao --
 map('n', 'yy', '"+yy', { desc = "Copiar linha para o clipboard do sistema" })
-map('n', 'yy', '"+yy', { desc = "Copiar linha para o clipboard" })
 map('n', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
 map('v', 'p', '"+p', { desc = "Colar do clipboard do sistema" })
   
@@ -180,3 +192,45 @@ vim.keymap.set("n", "<leader>ai", function()
         end
     end)
 end, { desc = "Gemini: Pergunta com contexto do arquivo" })
+
+
+-- #######################################################
+-- BLOCO WHICH-KEY: NOMEIA OS GRUPOS DE ATALHOS
+-- #######################################################
+
+if wk_ok then
+  -- Define o nome do grupo principal do projeto
+  wk.add({
+    { "<leader>p", group = "Projeto: Debug, Snippets, Ferramentas" },
+  })
+
+  -- Define o nome do subgrupo de Debugger (p + d)
+  wk.add({
+    { "<leader>pd", group = "Debugger (DAP)" },
+  })
+  
+  -- Define o nome do subgrupo de Snippets (p + l)
+  wk.add({
+    { "<leader>pl", group = "LuaSnip (Snippets)" },
+  })
+  
+  -- Define o nome para o grupo do <leader>k (Kill/Fechar)
+  wk.add({
+    { "<leader>k", group = "Fechar (Kill)" },
+  })
+  
+  -- Define o nome para o grupo do <leader>f (Formatar/Telescope Find)
+  wk.add({
+    { "<leader>f", group = "Busca/Formatar" },
+  })
+
+  -- Define o nome para o grupo do <leader>r (LSP Rename/Telescope Replace)
+  wk.add({
+    { "<leader>r", group = "Renomear/Substituir" },
+  })
+  
+  -- Define o nome para o grupo do <leader>rc (Reload Config)
+  wk.add({
+    { "<leader>r", group = "Recarregar Config" },
+  })
+end
