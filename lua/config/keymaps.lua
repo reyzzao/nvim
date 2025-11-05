@@ -117,7 +117,7 @@ map('n', 'gr', vim.lsp.buf.references, { desc = 'LSP: Ir para referências' })
 map('n', 'gi', vim.lsp.buf.implementation, { desc = 'LSP: Ir para implementação' })
 map('n', 'K', vim.lsp.buf.hover, { desc = 'LSP: Inspecionar Hover' })
 
-map('n', '<leader>r', vim.lsp.buf.rename, { desc = 'LSP: Renomear símbolo' })
+map('n', '<leader>rs', vim.lsp.buf.rename, { desc = 'LSP: Replace: Renomear símbolo' })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: Code Action' })
 map({ "n", "v" }, "<leader>f", function()
     vim.lsp.buf.format()
@@ -226,11 +226,11 @@ if wk_ok then
 
   -- Define o nome para o grupo do <leader>r (LSP Rename/Telescope Replace)
   wk.add({
-    { "<leader>r", group = "Renomear/Substituir" },
+    { "<leader>r", group = "Replace : Renomear/Substituir" },
   })
   
   -- Define o nome para o grupo do <leader>rc (Reload Config)
   wk.add({
-    { "<leader>r", group = "Recarregar Config" },
+    { "<leader>r", group = "Replace : Recarregar Config" },
   })
 end
