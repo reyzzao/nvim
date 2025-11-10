@@ -15,9 +15,8 @@ map("n", "<leader>xe", ':Ex<CR>', { desc = "explorer nativo netwr" })
 map('n', '<C-Down>', 'yyP', { desc = 'Duplicar linha' })
 map('v', '<C-Down>', 'yP', { desc = 'Duplicar seleção' })
 
---- Prefixo: leader + p (APENAS GRUPOS) e Comandos de Acao Imediata (RAIZ)
 map('n', '<leader>h', functions.InsertHeader, { desc = 'Insere endereço relativo do arquivo.' }) -- Movido de <leader>ph
-map('n', '<leader>m', ':messages<CR>', { desc = 'Mostra mensagens' }) -- Movido de <leader>pm
+map('n', '<A-m>', ':messages<CR>', { desc = 'Mostra mensagens' })
 
 -- NOVO Atalho de Recarregar Configuração: <leader>rc
 map("n", "<leader>rc", function()
@@ -33,19 +32,11 @@ end, { desc = 'Fechar o Neovim e salvar sessao com :qa!' })
 -- NOVO MAPA: Ver Snippets Disponíveis
 vim.keymap.set('n', '<leader>pls', '<cmd>LuaSnipListAvailable<CR>', { desc = 'Mostra Lista de Snippets' })
 
--- BLOCO DE GRUPO: Atalhos de Debugger (Prefixado com <leader>pd)
-map('n', '<leader>pd', '<cmd>DapUiToggle<CR>', { desc = 'Debug: Alternar UI do DAP' })
-map('n', '<leader>pdt', '<cmd>DapTerminate<CR>', { desc = 'Debug: Terminar Sessão' })
-map('n', '<leader>pdb', '<cmd>DapToggleBreakpoint<CR>', { desc = 'Debug: Adicionar/Remover Breakpoint' })
-map('n', '<leader>pds', '<cmd>DapStepOver<CR>', { desc = 'Debug: Step Over (Próxima Linha)' })
-map('n', '<leader>pdn', '<cmd>DapStepOut<CR>', { desc = 'Debug: Step Out (Sair da Função)' })
-map('n', '<leader>pdi', '<cmd>DapStepInto<CR>', { desc = 'Debug: Step Into (Entrar na Função)' })
-map('n', '<leader>pdc', '<cmd>DapContinue<CR>', { desc = 'Debug: Continuar Execução' })
 
 --- -------------------------------------------
 
 --- Mapeamentos de COPIAR/RECORTAR/COLAR  
-map('n', '<leader>u', function() -- Movido de <leader>pu
+map('n', '<A-p>', function() -- Movido de <leader>pu
   local file_path = vim.fn.expand("%:p")
   vim.fn.setreg('+', file_path)
   notify("Caminho do arquivo copiado!", log_info, { title = "Caminho Copiado" })
@@ -173,26 +164,6 @@ map("v", "<S-Up>", ":<C-u>normal! ^k<CR>", { desc = "Selecionar para cima" })
 map("v", "<S-Down>", ":<C-u>normal! ^j<CR>", { desc = "Selecionar para baixo" })
 map("v", "<S-Left>", "<left>", { desc = "Selecionar para esquerda" })
 map("v", "<S-Right>", "<right>", { desc = "Selecionar para direita" })
-
---- Maps IA Gemini
-vim.keymap.set("n", "<leader>ai", function()
-    local gemini = require("gemini")
-    vim.ui.input({ prompt = "Consulta para o Gemini: " }, function(query)
-        if not query or #query == 0 then
-            return
-        end
-        vim.notify("Gerando resposta... Aguarde...", vim.log.levels.INFO, { title = "Gemini.nvim" })
-        local response = gemini.prompt(query)
-        if response and response.result and response.result.candidates and response.result.candidates[1] then
-            local text = response.result.candidates[1].content.parts[1].text
-            vim.api.nvim_buf_set_lines(0, vim.api.nvim_buf_line_count(0), -1, false, { " ", "-- Resposta do Gemini:", " ", text })
-            vim.notify("Resposta gerada!", vim.log.levels.INFO, { title = "Gemini.nvim" })
-        else
-            vim.notify("Erro ao gerar resposta.", vim.log.levels.ERROR, { title = "Gemini.nvim" })
-        end
-    end)
-end, { desc = "Gemini: Pergunta com contexto do arquivo" })
-
 
 -- #######################################################
 -- BLOCO WHICH-KEY: NOMEIA OS GRUPOS DE ATALHOS

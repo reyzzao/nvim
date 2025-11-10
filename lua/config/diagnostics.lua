@@ -2,6 +2,7 @@
 -- @mission: Configura a exibicao global de diagnosticos (erros e avisos), destaques e mapeamentos.
 
 local M = {}
+local map = vim.keymap.set
 
 --- Configura a exibicao de diagnosticos (virtual_text, float, signs)
 M.setup_diagnostics = function()
@@ -89,19 +90,24 @@ M.setup_warning_highlights = function()
   })
 end
 
---- Configura os mapeamentos de teclado para diagnósticos e ações LSP
-M.setup_keymaps = function()
-  -- Diagnostico de erros
-  -- @mission: Mapeamentos globais para diagnósticos e ações LSP.
+-- BLOCO DE GRUPO: Atalhos de Debugger 
+-- Atalhos com prefixo db de debugger correcoes prefixo: <db + >
+map('n', '<leader>dbx', '<cmd>DapUiToggle<CR>', { desc = 'Debug: Alternar UI do DAP' })
+map('n', '<leader>dbt', '<cmd>DapTerminate<CR>', { desc = 'Debug: Terminar Sessão' })
+map('n', '<leader>dbb', '<cmd>DapToggleBreakpoint<CR>', { desc = 'Debug: Adicionar/Remover Breakpoint' })
+map('n', '<leader>dbs', '<cmd>DapStepOver<CR>', { desc = 'Debug: Step Over (Próxima Linha)' })
+map('n', '<leader>dbn', '<cmd>DapStepOut<CR>', { desc = 'Debug: Step Out (Sair da Função)' })
+map('n', '<leader>dbi', '<cmd>DapStepInto<CR>', { desc = 'Debug: Step Into (Entrar na Função)' })
+map('n', '<leader>dbc', '<cmd>DapContinue<CR>', { desc = 'Debug: Continuar Execução' })
 
-  -- DIAGNOSTICOS E CORREÇÕES (Prefixado com <leader>pd)
-  -- @mission: Mapeamentos globais para diagnósticos e ações LSP.
-  vim.keymap.set('n', '<leader>pde', vim.diagnostic.open_float, { desc = 'LSP: Show diagnostic float' })
-  vim.keymap.set('n', '<leader>pdl', vim.diagnostic.setloclist, { desc = 'LSP: Diagnostics List (loclist)' })
-  vim.keymap.set('n', '<leader>pdn', vim.diagnostic.goto_next, { desc = 'LSP: Next Diagnostic' })
-  vim.keymap.set('n', '<leader>pdp', vim.diagnostic.goto_prev, { desc = 'LSP: Previous Diagnostic' })
-  vim.keymap.set('n', '<leader>pca', vim.lsp.buf.code_action, { desc = 'LSP: Code Action (Correcao)' })
-  vim.keymap.set('n', '<leader>pdz', vim.lsp.buf.code_action, { desc = 'LSP: Sugestão corrigir erro' })
+M.setup_keymaps = function()
+  -- @mission: Mapeamentos globais para diagnósticos e ações LSP. - atalhos só com <d> para aparecer primeiro na sessao d
+  map('n', '<leader>dx', vim.diagnostic.setloclist, { desc = 'LSP: Diagnostics List (loclist)' })
+  map('n', '<leader>de', vim.diagnostic.open_float, { desc = 'LSP: Show diagnostic float' })
+  map('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'LSP: Next Diagnostic' })
+  map('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'LSP: Previous Diagnostic' })
+  map('n', '<leader>di', vim.lsp.buf.code_action, { desc = 'LSP: Code Action (Correcao)' })
+  map('n', '<leader>dz', vim.lsp.buf.code_action, { desc = 'LSP: Sugestão corrigir erro' })
   -- FIM: Diagnostico erros
 end
 
