@@ -1,28 +1,27 @@
--- @file: ~/.config/nvim/init.lua
--- @mission: Inicializacao principal do Neovim, garantindo a ordem correta de carregamento.
+-- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
+-- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
--- 1. ESSENCIAL: Carrega a configuracao do Lazy e o inicializa, carregando plugins e o colorscheme.
--- Este passo carrega o TokyoNight (e dispara o evento ColorScheme).
-require("config.lazy")
-require("lazy").setup("plugins")
+if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
+  -- stylua: ignore
+  local result = vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  if vim.v.shell_error ~= 0 then
+    -- stylua: ignore
+    vim.api.nvim_echo({ { ("Error cloning lazy.nvim:\n%s\n"):format(result), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+    vim.fn.getchar()
+    vim.cmd.quit()
+  end
+end
 
--- 2. Carrega Destaques e Configuracoes Atrasadas
--- O custom_highlights DEVE vir DEPOIS do setup do Lazy.
--- Ele garante que a cor do CursorLine seja definida por ultimo, após o colorscheme.
-require("config.custom_highlights")
+vim.opt.rtp:prepend(lazypath)
 
--- 3. Outras Configuracoes
-require("config.ProductivityUtils")
-require("config.diagnostics")
+-- validate that lazy is available
+if not pcall(require, "lazy") then
+  -- stylua: ignore
+  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
 
-
--- AUXILIARES FORCE INIT
-vim.opt.guicursor = "n:block,v:block,i:ver100,r:block,c:v" -- força cursor para IBeam - obs: aplique : $ `reset` no terminal antes.
-
--- ESSENCIAL: Desativa as dicas de parametros e tipos do LSP ( tentando limpar autocomplete intrometidos).
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("NoInlayHints", { clear = true }),
-  callback = function(args)
-    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
-  end,
-})
+require "lazy_setup"
+require "polish"
