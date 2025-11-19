@@ -1,4 +1,7 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- @file: ~/.config/nvim/lua/plugins/user.lua
+
+-- REMOVA A LINHA if true then return {} end PARA ATIVAR ESTE ARQUIVO!
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
@@ -6,6 +9,15 @@ if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 ---@type LazySpec
 return {
+  -- IMPORTACAO CRUCIAL:
+  -- 1. Importa todos os plugins da sua pasta custom/plugins (incluindo o Noice)
+  { import = "custom.plugins" },
+  
+  -- 2. Executa o seu arquivo de configuracao (Keymaps, vim.opt)
+  -- NOTA: O Lazy vai executar o custom.Index.lua no momento mais seguro.
+  { import = "custom.Index" },
+  
+  -- == Resto do arquivo original do AstroNvim... ==
 
   -- == Examples of Adding Plugins ==
 
